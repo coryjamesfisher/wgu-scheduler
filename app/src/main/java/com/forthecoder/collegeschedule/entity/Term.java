@@ -2,7 +2,8 @@ package com.forthecoder.collegeschedule.entity;
 
 import java.util.Date;
 
-public class Term {
+public class Term extends BaseEntity {
+
     private String title;
     private Date startDate;
     private Date endDate;

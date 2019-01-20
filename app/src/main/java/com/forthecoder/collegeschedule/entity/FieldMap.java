@@ -10,12 +10,14 @@ import java.util.Date;
 
 public class FieldMap {
     private String field;
-    private Method method;
+    private Method setterMethod;
+    private Method getterMethod;
     private Class type;
 
-    public FieldMap(String field, Method method, Class type) {
+    public FieldMap(String field, Method setterMethod, Method getterMethod, Class type) {
         this.field = field;
-        this.method = method;
+        this.setterMethod = setterMethod;
+        this.getterMethod = getterMethod;
         this.type = type;
     }
 
@@ -27,12 +29,20 @@ public class FieldMap {
         this.field = field;
     }
 
-    public Method getMethod() {
-        return method;
+    public Method getSetterMethod() {
+        return setterMethod;
     }
 
-    public void setMethod(Method method) {
-        this.method = method;
+    public void setSetterMethod(Method setterMethod) {
+        this.setterMethod = setterMethod;
+    }
+
+    public Method getGetterMethod() {
+        return getterMethod;
+    }
+
+    public void setGetterMethod(Method getterMethod) {
+        this.getterMethod = getterMethod;
     }
 
     public Class getType() {
@@ -43,11 +53,11 @@ public class FieldMap {
         this.type = type;
     }
 
-    public void onto(Object obj, Cursor cursor) throws ApplicationException, InvocationTargetException, IllegalAccessException {
-        this.getMethod().invoke(obj, getValue(cursor));
+    public void ontoEntity(Object obj, Cursor cursor) throws ApplicationException, InvocationTargetException, IllegalAccessException {
+        this.getSetterMethod().invoke(obj, dbToEntityValue(cursor));
     }
 
-    private Object getValue(Cursor cursor) throws ApplicationException {
+    private Object dbToEntityValue(Cursor cursor) throws ApplicationException {
 
         if (type == Integer.TYPE) {
             return cursor.getInt(cursor.getColumnIndex(this.getField()));

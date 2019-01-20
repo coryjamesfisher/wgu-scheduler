@@ -1,6 +1,5 @@
 package com.forthecoder.collegeschedule;
 
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,7 +11,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.forthecoder.collegeschedule.entity.Term;
 import com.forthecoder.collegeschedule.entity.TermRepository;
+import com.forthecoder.collegeschedule.exception.ApplicationException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +25,15 @@ public class MainActivity extends AppCompatActivity {
         Log.e("ERROR", "APPLICATION STARTED");
         DB db = new DB(this.getApplicationContext());
         SQLiteDatabase database = db.getWritableDatabase();
+
+//        @todo This can be used as a reference for how to query by id
+//        TermRepository tr = new TermRepository(database);
+//        try {
+//            Term term = tr.findOneByRowid(1);
+//            Log.e("ERROR", "TERM IS " + term.getTitle());
+//        } catch (ApplicationException e) {
+//            Log.e("ERROR", e.toString());
+//        }
         String[] vals = new String[0];
 
         setContentView(R.layout.activity_main);

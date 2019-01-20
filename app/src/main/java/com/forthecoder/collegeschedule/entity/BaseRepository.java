@@ -28,18 +28,29 @@ public class BaseRepository<T> {
         Field[] fieldList = clazz.getDeclaredFields();
         for (Field field : fieldList) {
 
+            if (field.getName().equals("serialVersionUID") || field.getName().equals("$change")) {
+                continue;
+            }
+
             String columnName = field.getName();
 
-            // Check if there is a public setter
-            String search = "set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1);
-            for (Method method : clazz.getDeclaredMethods()) {
+            // Get the public setter and getter
+            Method setter = findMethod("set" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
+            Method getter = findMethod("get" + field.getName().substring(0, 1).toUpperCase() + field.getName().substring(1));
 
-                if (Modifier.isPublic(method.getModifiers()) && method.getName().equals(search)) {
-                    fieldMaps.add(new FieldMap(columnName, method, field.getType()));
-                    break;
-                }
+            fieldMaps.add(new FieldMap(columnName, setter, getter, field.getType()));
+        }
+    }
+
+    private Method findMethod(String methodName) {
+        for (Method method : clazz.getDeclaredMethods()) {
+
+            if (Modifier.isPublic(method.getModifiers()) && method.getName().equals(methodName)) {
+                return method;
             }
         }
+
+        return null;
     }
 
     public T fromResultSet(Cursor cursor) throws ApplicationException {
@@ -58,7 +69,7 @@ public class BaseRepository<T> {
 
         for (FieldMap map : this.fieldMaps) {
             try {
-                map.onto(obj, cursor);
+                map.ontoEntity(obj, cursor);
             } catch (IllegalAccessException | InvocationTargetException | IllegalArgumentException e) {
 
                 // Should never happen.
@@ -80,6 +91,43 @@ public class BaseRepository<T> {
         return entityList;
     }
 
+    public T findOneByRowid(Integer rowid) throws ApplicationException {
+        List<T> entityList = queryList("SELECT * FROM " + this.clazz.getSimpleName() + " WHERE rowid=?", rowid.toString());
+
+        if (entityList.size() == 0) {
+            throw new ApplicationException("Entity not found with rowid " + rowid.toString(), null);
+        }
+
+        return entityList.get(0);
+    }
+
+    public void insert(T obj) throws InvocationTargetException, IllegalAccessException, ApplicationException {
+
+        StringBuilder insertSQL = new StringBuilder("INSERT INTO " + clazz.getSimpleName() + "(");
+
+        List<Object> values = new ArrayList<>();
+
+        for (FieldMap fieldMap : this.fieldMaps) {
+            insertSQL.append(fieldMap.getField()).append(",");
+            values.add(fieldMap.getGetterMethod().invoke(obj));
+        }
+        insertSQL.deleteCharAt(insertSQL.length() - 1);
+        insertSQL.append(") VALUES (");
+
+        for (int i = 0; i < values.size(); i++) {
+            insertSQL.append("?,");
+        }
+        insertSQL.deleteCharAt(insertSQL.length() - 1);
+        insertSQL.append(");");
+
+        try {
+            Log.e("ERROR", insertSQL.toString());
+            dbConnection.execSQL(insertSQL.toString(), values.toArray());
+        } catch (SQLException e) {
+            throw new ApplicationException("A system error has occurred.", e);
+        }
+    }
+
     public void createSchema() throws ApplicationException {
 
         StringBuilder schemaSQL = new StringBuilder("CREATE TABLE " + clazz.getSimpleName() + " (");
@@ -87,7 +135,10 @@ public class BaseRepository<T> {
         for (FieldMap map : fieldMaps) {
 
             if (map.getType() == Integer.TYPE) {
-                schemaSQL.append(map.getField()).append(" INTEGER,");
+
+                if (!map.getField().equals("rowid")) {
+                    schemaSQL.append(map.getField()).append(" INTEGER,");
+                }
             } else if (map.getType() == String.class || map.getType() == Date.class) {
                 schemaSQL.append(map.getField()).append(" TEXT,");
             }
