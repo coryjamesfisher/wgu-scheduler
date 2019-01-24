@@ -9,12 +9,85 @@
     tools:showIn="@layout/activity_main">
 
     <TextView
+        android:id="@+id/termProgressHeading"
+        android:layout_width="164dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:text="TERM PROGRESS"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/termProgressIndicator"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="182dp"
+        android:layout_height="161dp"
+        android:layout_marginTop="12dp"
+        android:max="100"
+        android:progress="80"
+        app:layout_constraintTop_toBottomOf="@+id/termProgressHeading"
+        tools:layout_editor_absoluteX="16dp" />
+
+    <TextView
+        android:id="@+id/degreeProgressHeading"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:text="DEGREE PROGRESS"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/termProgressHeading"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/degreeProgressIndicator"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="182dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:max="100"
+        android:progress="80"
+        app:layout_constraintStart_toEndOf="@+id/termProgressIndicator"
+        app:layout_constraintTop_toBottomOf="@+id/degreeProgressHeading" />
+
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="degreeProgressHeading,upcomingEventsHeading" />
+
+    <ListView
+        android:layout_width="327dp"
+        android:layout_height="186dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="68dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/upcomingEventsHeading" />
+
+    <TextView
+        android:id="@+id/upcomingEventsHeading"
+        android:layout_width="213dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="164dp"
+        android:ems="10"
+        android:text="UPCOMING EVENTS"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="316dp" />
 
 </android.support.constraint.ConstraintLayout>
