@@ -55,12 +55,16 @@ abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * This method is designed for use with UI elements that
+     * when clicked start a new activity. The android:tag property
+     * must contain a valid fully qualified class name.
+     *
+     * @param view - the clicked UI element
+     */
     public void navigateToTarget(View view) {
 
-        Log.e("ERROR", view.getTag().toString());
-
         try {
-            Log.e("HELLLLL", Class.forName((String) view.getTag()).toString());
             Intent intent = new Intent(this, Class.forName((String) view.getTag()));
             startActivity(intent);
         } catch (ClassNotFoundException e) {

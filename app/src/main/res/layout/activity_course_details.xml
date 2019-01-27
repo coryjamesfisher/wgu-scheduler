@@ -1,6 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content" android:layout_width="wrap_content"
+    tools:context=".CourseDetailsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/courseDetailsTitle"
+            android:layout_width="164dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:text="@string/courseDetailsTitle"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/courseTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="TITLE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseDetailsTitle" />
+
+        <TextView
+            android:id="@+id/courseTitleValue"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:text="FIRST TERM"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseTitleLabel" />
+
+        <TextView
+            android:id="@+id/courseStartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="COURSE START"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseTitleValue" />
+
+        <TextView
+            android:id="@+id/courseStartValue"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:text="01/01/2018"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseStartLabel" />
+
+        <TextView
+            android:id="@+id/courseEndLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="COURSE ANTICIPATED END"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseStartValue" />
+
+        <TextView
+            android:id="@+id/courseEndValue"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:text="01/01/2019"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseEndLabel" />
+
+        <TextView
+            android:id="@+id/courseStatusLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="STATUS"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseEndValue" />
+
+        <TextView
+            android:id="@+id/courseStatusValue"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:textSize="18sp"
+            android:text="IN PROGRESS|COMPLETED|DROPPED|PLAN"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseStatusLabel" />
+
+        <Button
+            android:id="@+id/listAssessmentsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIST ASSESSMENTS"
+            android:layout_marginTop="10dp"
+            android:tag="com.forthecoder.collegeschedule.AssessmentsActivity"
+            android:onClick="navigateToTarget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/courseStatusValue"/>
+
+        <Button
+            android:id="@+id/listMentorsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="LIST COURSE MENTORS"
+            android:layout_marginTop="10dp"
+            android:tag="com.forthecoder.collegeschedule.MentorsActivity"
+            android:onClick="navigateToTarget"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/listAssessmentsButton"/>
+
+        <TextView
+            android:id="@+id/courseNotesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="NOTES"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/listMentorsButton" />
+
+
+        <ListView
+            android:id="@+id/courseNotesList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseNotesLabel">
+        </ListView>
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

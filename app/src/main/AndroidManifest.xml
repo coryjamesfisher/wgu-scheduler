@@ -39,6 +39,7 @@
         <activity android:name=".TermDetailsActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".MentorsActivity" />
     </application>
 
 </manifest>

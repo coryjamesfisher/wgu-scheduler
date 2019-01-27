@@ -12,4 +12,10 @@
     <string name="menu_current_term">Current Term</string>
     <string name="menu_all_terms">All Terms</string>
     <string name="term_details">TERM DETAILS</string>
+    <string name="coursesTitle">COURSES</string>
+    <string name="assessmentsTitle">ASSESSMENTS</string>
+    <string name="alertsTitle">ALERTS</string>
+    <string name="courseDetailsTitle">COURSE DETAILS</string>
+    <string name="mentorsTitle">MENTORS</string>
+    <string name="assessmentDetailsTitle">ASSESSMENT DETAILS</string>
 </resources>
