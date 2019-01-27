@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    android:layout_height="wrap_content" android:layout_width="wrap_content"
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
+
+<android.support.constraint.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <TextView
         android:id="@+id/termProgressHeading"
         android:layout_width="164dp"
         android:layout_height="26dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:text="TERM PROGRESS"
         android:textAllCaps="false"
@@ -25,21 +28,23 @@
 
     <ProgressBar
         android:id="@+id/termProgressIndicator"
-        style="?android:attr/progressBarStyle"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="182dp"
         android:layout_height="161dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
         android:max="100"
         android:progress="80"
-        app:layout_constraintTop_toBottomOf="@+id/termProgressHeading"
-        tools:layout_editor_absoluteX="16dp" />
+        android:progressTint="@color/colorGreen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termProgressHeading" />
 
     <TextView
         android:id="@+id/degreeProgressHeading"
         android:layout_width="172dp"
         android:layout_height="26dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:text="DEGREE PROGRESS"
         android:textAllCaps="false"
@@ -51,13 +56,14 @@
 
     <ProgressBar
         android:id="@+id/degreeProgressIndicator"
-        style="?android:attr/progressBarStyle"
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:layout_width="182dp"
         android:layout_height="161dp"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
         android:max="100"
         android:progress="80"
+        android:progressTint="@color/colorGreen"
         app:layout_constraintStart_toEndOf="@+id/termProgressIndicator"
         app:layout_constraintTop_toBottomOf="@+id/degreeProgressHeading" />
 
@@ -71,15 +77,17 @@
     <ListView
         android:layout_width="327dp"
         android:layout_height="186dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="68dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/barrier2"
         app:layout_constraintTop_toBottomOf="@+id/upcomingEventsHeading" />
 
     <TextView
         android:id="@+id/upcomingEventsHeading"
         android:layout_width="213dp"
         android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="88dp"
         android:layout_marginEnd="164dp"
         android:ems="10"
         android:text="UPCOMING EVENTS"
@@ -88,6 +96,9 @@
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="316dp" />
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termProgressIndicator" />
 
 </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
