@@ -1,33 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content" android:layout_width="wrap_content"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/activity_base">
+
+<android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+    <TextView
+        android:id="@+id/termProgressHeading"
+        android:layout_width="164dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:text="@string/termProgressHeading"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <ProgressBar
+        android:id="@+id/termProgressIndicator"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="182dp"
+        android:layout_height="161dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:max="100"
+        android:progress="80"
+        android:progressTint="@color/colorGreen"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termProgressHeading" />
 
-    </android.support.design.widget.AppBarLayout>
+    <TextView
+        android:id="@+id/degreeProgressHeading"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:text="@string/degreeProgressHeading"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/termProgressHeading"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <include layout="@layout/content_main" />
+    <ProgressBar
+        android:id="@+id/degreeProgressIndicator"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_width="182dp"
+        android:layout_height="161dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:max="100"
+        android:progress="80"
+        android:progressTint="@color/colorGreen"
+        app:layout_constraintStart_toEndOf="@+id/termProgressIndicator"
+        app:layout_constraintTop_toBottomOf="@+id/degreeProgressHeading" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+    <android.support.constraint.Barrier
+        android:id="@+id/barrier2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="degreeProgressHeading,upcomingEventsHeading" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <ListView
+        android:layout_width="327dp"
+        android:layout_height="186dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toEndOf="@+id/barrier2"
+        app:layout_constraintTop_toBottomOf="@+id/upcomingEventsHeading" />
+
+    <TextView
+        android:id="@+id/upcomingEventsHeading"
+        android:layout_width="213dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="164dp"
+        android:ems="10"
+        android:text="@string/upcomingEventsHeading"
+        android:textAllCaps="false"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.533"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/allTermsButton" />
+
+    <Button
+        android:id="@+id/allTermsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="84dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/allTermsButton"
+        app:layout_constraintStart_toEndOf="@+id/currentTermButton"
+        app:layout_constraintTop_toBottomOf="@+id/degreeProgressIndicator"
+        android:tag="com.forthecoder.collegeschedule.TermsActivity"
+        android:onClick="navigateToTarget"/>
+
+    <Button
+        android:id="@+id/currentTermButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="44dp"
+        android:layout_marginTop="20dp"
+        android:text="@string/currentTermButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/termProgressIndicator"
+        android:tag="com.forthecoder.collegeschedule.TermDetailsActivity"
+        android:onClick="navigateToTarget" />
+
+</android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>
