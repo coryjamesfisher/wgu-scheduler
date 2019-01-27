@@ -6,7 +6,7 @@ public class CoursesActivity extends BaseActivity {
 
     public CoursesActivity() {
         super();
-        layout = R.layout.activity_courses;
+        contentLayout = R.layout.activity_courses;
         Log.e("ERROR", "COURSES ACTIVITY STARTED");
     }
 }

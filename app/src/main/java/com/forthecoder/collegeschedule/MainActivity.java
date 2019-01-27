@@ -4,7 +4,7 @@ public class MainActivity extends BaseActivity {
 
     public MainActivity() {
         super();
-        layout = R.layout.activity_main;
+        contentLayout = R.layout.activity_main;
     }
 
 }

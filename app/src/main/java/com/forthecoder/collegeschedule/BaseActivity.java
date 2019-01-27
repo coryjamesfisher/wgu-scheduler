@@ -5,9 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
@@ -21,9 +19,22 @@ import android.view.ViewStub;
 
 abstract class BaseActivity extends AppCompatActivity {
 
-    @LayoutRes
-    protected int layout;
+    /**
+     * Wrapper contentLayout that all activity layouts will nest inside.
+     */
     private DrawerLayout mainLayout;
+
+    /**
+     * Activity specific layout holding that activity's content.
+     */
+    @LayoutRes
+    protected int contentLayout;
+
+    /**
+     * Activity specific layout holding that activities floating actions.
+     */
+    @LayoutRes
+    protected int actionLayout = 0;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -78,7 +89,7 @@ abstract class BaseActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_base);
         ViewStub viewStub = findViewById(R.id.content_view);
-        viewStub.setLayoutResource(layout);
+        viewStub.setLayoutResource(contentLayout);
         viewStub.inflate();
 
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -94,9 +105,7 @@ abstract class BaseActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-
-                        Log.e("NAVIGATION SELECTED", "HOLY CRAP");
+                    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 
                         menuItem.setChecked(true);
 
@@ -125,13 +134,11 @@ abstract class BaseActivity extends AppCompatActivity {
 
         mainLayout = findViewById(R.id.main_layout);
 
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        // If an action contentLayout has been specified inflate it and replace the stub.
+        if (actionLayout != 0) {
+            ViewStub actionStub = findViewById(R.id.floating_action_view);
+            actionStub.setLayoutResource(actionLayout);
+            actionStub.inflate();
+        }
     }
 }

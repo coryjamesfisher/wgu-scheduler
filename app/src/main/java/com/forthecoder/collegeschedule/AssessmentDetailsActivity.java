@@ -6,7 +6,7 @@ public class AssessmentDetailsActivity extends BaseActivity {
 
     public AssessmentDetailsActivity() {
         super();
-        layout = R.layout.assessment_details;
+        contentLayout = R.layout.activity_assessment_details;
         Log.e("ERROR", "ASSESSMENT DETAILS ACTIVITY STARTED");
     }
 }

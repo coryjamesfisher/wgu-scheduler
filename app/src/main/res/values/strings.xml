@@ -11,4 +11,5 @@
     <string name="menu_home_text">Home</string>
     <string name="menu_current_term">Current Term</string>
     <string name="menu_all_terms">All Terms</string>
+    <string name="term_details">TERM DETAILS</string>
 </resources>

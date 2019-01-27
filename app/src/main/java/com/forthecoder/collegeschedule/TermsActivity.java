@@ -6,7 +6,7 @@ public class TermsActivity extends BaseActivity {
 
     public TermsActivity() {
         super();
-        layout = R.layout.activity_terms;
+        contentLayout = R.layout.activity_terms;
         Log.e("ERROR", "TERMS ACTIVITY STARTED");
     }
 }
