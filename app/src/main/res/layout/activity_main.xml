@@ -98,31 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/allTermsButton" />
-
-    <Button
-        android:id="@+id/allTermsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="84dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/allTermsButton"
-        app:layout_constraintStart_toEndOf="@+id/currentTermButton"
-        app:layout_constraintTop_toBottomOf="@+id/degreeProgressIndicator"
-        android:tag="com.forthecoder.collegeschedule.TermsActivity"
-        android:onClick="navigateToTarget"/>
-
-    <Button
-        android:id="@+id/currentTermButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="20dp"
-        android:text="@string/currentTermButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termProgressIndicator"
-        android:tag="com.forthecoder.collegeschedule.TermDetailsActivity"
-        android:onClick="navigateToTarget" />
+        app:layout_constraintTop_toBottomOf="@+id/termProgressIndicator" />
 
 </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

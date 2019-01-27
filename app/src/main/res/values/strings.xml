@@ -7,4 +7,8 @@
     <string name="allTermsButton">All Terms</string>
     <string name="currentTermButton">Current Term</string>
     <string name="allTermsTitle">ALL TERMS</string>
+    <string name="navigation_panel_title">Navigation Panel</string>
+    <string name="menu_home_text">Home</string>
+    <string name="menu_current_term">Current Term</string>
+    <string name="menu_all_terms">All Terms</string>
 </resources>

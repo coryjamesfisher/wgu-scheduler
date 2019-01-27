@@ -4,8 +4,13 @@ import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,6 +23,7 @@ abstract class BaseActivity extends AppCompatActivity {
 
     @LayoutRes
     protected int layout;
+    private DrawerLayout mainLayout;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -28,14 +34,11 @@ abstract class BaseActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch(item.getItemId()) {
+            case android.R.id.home:
+                mainLayout.openDrawer(GravityCompat.START);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
@@ -80,6 +83,47 @@ abstract class BaseActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionbar = getSupportActionBar();
+        actionbar.setDisplayHomeAsUpEnabled(true);
+        actionbar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+
+        final BaseActivity self = this;
+
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+
+                        Log.e("NAVIGATION SELECTED", "HOLY CRAP");
+
+                        menuItem.setChecked(true);
+
+                        Class targetClass = null;
+                        switch(menuItem.getItemId()) {
+                            case R.id.nav_home:
+                                targetClass = MainActivity.class;
+                                break;
+                            case R.id.nav_current_term:
+                                targetClass = TermDetailsActivity.class;
+                                break;
+                            case R.id.nav_terms:
+                                targetClass = TermsActivity.class;
+                                break;
+                            default:
+                                return false;
+                        }
+
+
+                        startActivity(new Intent(self, targetClass));
+                        mainLayout.closeDrawers();
+
+                        return true;
+                    }
+                });
+
+        mainLayout = findViewById(R.id.main_layout);
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
