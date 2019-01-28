@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Assessment extends BaseEntity {
     private Integer courseId;
+    private String type;
     private String title;
     private Date goalDate;
 
@@ -11,8 +12,9 @@ public class Assessment extends BaseEntity {
 
     }
 
-    public Assessment(Integer courseId, String title, Date goalDate) {
+    public Assessment(Integer courseId, String type, String title, Date goalDate) {
         this.courseId = courseId;
+        this.type = type;
         this.title = title;
         this.goalDate = goalDate;
     }
@@ -39,5 +41,13 @@ public class Assessment extends BaseEntity {
 
     public void setGoalDate(Date goalDate) {
         this.goalDate = goalDate;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

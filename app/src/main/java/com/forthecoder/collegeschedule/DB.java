@@ -5,7 +5,9 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.forthecoder.collegeschedule.entity.Alert;
 import com.forthecoder.collegeschedule.entity.AlertRepository;
+import com.forthecoder.collegeschedule.entity.Assessment;
 import com.forthecoder.collegeschedule.entity.AssessmentRepository;
 import com.forthecoder.collegeschedule.entity.Course;
 import com.forthecoder.collegeschedule.entity.CourseRepository;
@@ -51,6 +53,11 @@ public class DB extends SQLiteOpenHelper {
             courseRepository.insert(new Course(1,"C196", now, now, "IN PROGRESS", 1, ""));
             courseRepository.insert(new Course(1,"C198", now, now, "IN PROGRESS", 1, ""));
             courseRepository.insert(new Course(2,"C196", now, now, "IN PROGRESS", 1, ""));
+
+            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now));
+            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now));
+
+            alertRepository.insert(new Alert(1, 1, now, "REMINDER - TAKE EXAM TODAY"));
         } catch (Exception e) {
             // ignore
             Log.e("ERROR", e.toString());

@@ -114,6 +114,9 @@ abstract class BaseActivity extends AppCompatActivity {
                             case R.id.nav_terms:
                                 targetClass = TermsActivity.class;
                                 break;
+                            case R.id.nav_alerts:
+                                targetClass = AlertsActivity.class;
+                                break;
                             default:
                                 return false;
                         }

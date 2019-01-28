@@ -18,4 +18,5 @@
     <string name="courseDetailsTitle">COURSE DETAILS</string>
     <string name="mentorsTitle">MENTORS</string>
     <string name="assessmentDetailsTitle">ASSESSMENT DETAILS</string>
+    <string name="menu_alerts">Alerts</string>
 </resources>
