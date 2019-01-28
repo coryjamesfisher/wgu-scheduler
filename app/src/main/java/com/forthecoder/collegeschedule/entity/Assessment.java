@@ -7,6 +7,16 @@ public class Assessment extends BaseEntity {
     private String title;
     private Date goalDate;
 
+    public Assessment() {
+
+    }
+
+    public Assessment(Integer courseId, String title, Date goalDate) {
+        this.courseId = courseId;
+        this.title = title;
+        this.goalDate = goalDate;
+    }
+
     public Integer getCourseId() {
         return courseId;
     }

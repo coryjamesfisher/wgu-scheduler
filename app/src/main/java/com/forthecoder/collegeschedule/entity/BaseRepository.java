@@ -40,6 +40,9 @@ public class BaseRepository<T> {
 
             fieldMaps.add(new FieldMap(columnName, setter, getter, field.getType()));
         }
+
+        // Add base fields.
+        fieldMaps.add(new FieldMap("rowid", findMethod("setRowid"), findMethod("getRowid"), Long.TYPE));
     }
 
     private Method findMethod(String methodName) {
@@ -108,6 +111,10 @@ public class BaseRepository<T> {
         List<Object> values = new ArrayList<>();
 
         for (FieldMap fieldMap : this.fieldMaps) {
+
+            if (fieldMap.getField().equals("rowid")) {
+                continue;
+            }
             insertSQL.append(fieldMap.getField()).append(",");
             values.add(fieldMap.getGetterMethod().invoke(obj));
         }
@@ -134,7 +141,7 @@ public class BaseRepository<T> {
 
         for (FieldMap map : fieldMaps) {
 
-            if (map.getType() == Integer.TYPE) {
+            if (map.getType() == Integer.class) {
 
                 if (!map.getField().equals("rowid")) {
                     schemaSQL.append(map.getField()).append(" INTEGER,");
@@ -164,5 +171,9 @@ public class BaseRepository<T> {
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);
         }
+    }
+
+    public List<T> findAll() throws ApplicationException {
+        return queryList("SELECT rowid, * FROM " + this.clazz.getSimpleName());
     }
 }

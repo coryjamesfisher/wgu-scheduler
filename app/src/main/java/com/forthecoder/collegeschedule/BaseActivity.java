@@ -19,6 +19,8 @@ import android.view.ViewStub;
 
 abstract class BaseActivity extends AppCompatActivity {
 
+    private SQLiteDatabase database;
+
     /**
      * Wrapper contentLayout that all activity layouts will nest inside.
      */
@@ -76,20 +78,8 @@ abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-//        this.getApplicationContext().deleteDatabase("WGU_Scheduler");
-        Log.e("ERROR", "APPLICATION STARTED");
         DB db = new DB(this.getApplicationContext());
-        SQLiteDatabase database = db.getWritableDatabase();
-
-//        @todo This can be used as a reference for how to query by id
-//        TermRepository tr = new TermRepository(database);
-//        try {
-//            Term term = tr.findOneByRowid(1);
-//            Log.e("ERROR", "TERM IS " + term.getTitle());
-//        } catch (ApplicationException e) {
-//            Log.e("ERROR", e.toString());
-//        }
-        String[] vals = new String[0];
+        database = db.getWritableDatabase();
 
         setContentView(R.layout.activity_base);
         ViewStub viewStub = findViewById(R.id.content_view);
@@ -144,5 +134,14 @@ abstract class BaseActivity extends AppCompatActivity {
             actionStub.setLayoutResource(actionLayout);
             actionStub.inflate();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    public SQLiteDatabase getDatabase() {
+        return database;
     }
 }

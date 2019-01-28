@@ -7,20 +7,23 @@ import android.util.Log;
 
 import com.forthecoder.collegeschedule.entity.AlertRepository;
 import com.forthecoder.collegeschedule.entity.AssessmentRepository;
+import com.forthecoder.collegeschedule.entity.Course;
 import com.forthecoder.collegeschedule.entity.CourseRepository;
+import com.forthecoder.collegeschedule.entity.Mentor;
 import com.forthecoder.collegeschedule.entity.MentorRepository;
 import com.forthecoder.collegeschedule.entity.Term;
 import com.forthecoder.collegeschedule.entity.TermRepository;
 
+import java.time.Instant;
+import java.util.Calendar;
 import java.util.Date;
 
 public class DB extends SQLiteOpenHelper {
 
-    private static final String DB_NAME = "WGU_Scheduler";
+    public static final String DB_NAME = "WGU_Scheduler";
     private static final int DB_VERSION = 4;
 
     public DB(Context context) {
-
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -38,6 +41,16 @@ public class DB extends SQLiteOpenHelper {
             mentorRepository.createSchema();
             assessmentRepository.createSchema();
             alertRepository.createSchema();
+
+            Date now = Calendar.getInstance().getTime();
+            termRepository.insert(new Term("TERM 1", now, now));
+            termRepository.insert(new Term("TERM 2", now, now));
+
+            mentorRepository.insert(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
+
+            courseRepository.insert(new Course(1,"C196", now, now, "IN PROGRESS", 1, ""));
+            courseRepository.insert(new Course(1,"C198", now, now, "IN PROGRESS", 1, ""));
+            courseRepository.insert(new Course(2,"C196", now, now, "IN PROGRESS", 1, ""));
         } catch (Exception e) {
             // ignore
             Log.e("ERROR", e.toString());

@@ -2,13 +2,13 @@ package com.forthecoder.collegeschedule.entity;
 
 class BaseEntity {
 
-    private Integer rowid;
+    private Long rowid;
 
-    public Integer getRowid() {
+    public Long getRowid() {
         return rowid;
     }
 
-    public void setRowid(Integer rowid) {
+    public void setRowid(Long rowid) {
         this.rowid = rowid;
     }
 }

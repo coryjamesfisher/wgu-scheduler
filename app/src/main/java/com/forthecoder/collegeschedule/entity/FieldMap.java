@@ -59,7 +59,9 @@ public class FieldMap {
 
     private Object dbToEntityValue(Cursor cursor) throws ApplicationException {
 
-        if (type == Integer.TYPE) {
+        if (type == Long.TYPE) {
+            return cursor.getLong(cursor.getColumnIndex(this.getField()));
+        } else if (type == Integer.class) {
             return cursor.getInt(cursor.getColumnIndex(this.getField()));
         } else if (type == String.class) {
             return cursor.getString(cursor.getColumnIndex(this.getField()));

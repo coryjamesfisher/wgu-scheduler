@@ -8,6 +8,16 @@ public class Term extends BaseEntity {
     private Date startDate;
     private Date endDate;
 
+    public Term() {
+
+    }
+
+    public Term(String title, Date startDate, Date endDate) {
+        this.title = title;
+        this.startDate = startDate;
+        this.endDate = endDate;
+    }
+
     public String getTitle() {
         return title;
     }

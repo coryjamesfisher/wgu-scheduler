@@ -9,6 +9,17 @@ public class Alert extends BaseEntity {
     private Date date;
     private String text;
 
+    public Alert() {
+
+    }
+
+    public Alert(Integer courseId, Integer assessmentId, Date date, String text) {
+        this.courseId = courseId;
+        this.assessmentId = assessmentId;
+        this.date = date;
+        this.text = text;
+    }
+
     public Integer getCourseId() {
         return courseId;
     }

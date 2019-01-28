@@ -3,6 +3,9 @@ package com.forthecoder.collegeschedule.entity;
 import java.util.Date;
 
 public class Course extends BaseEntity {
+
+    private Integer termId;
+
     private String title;
 
     private Date startDate;
@@ -15,6 +18,28 @@ public class Course extends BaseEntity {
     private Integer mentorId;
 
     private String notes;
+
+    public Course() {
+
+    }
+
+    public Course(Integer termId, String title, Date startDate, Date anticipatedEndDate, String status, Integer mentorId, String notes) {
+        this.termId = termId;
+        this.title = title;
+        this.startDate = startDate;
+        this.anticipatedEndDate = anticipatedEndDate;
+        this.status = status;
+        this.mentorId = mentorId;
+        this.notes = notes;
+    }
+
+    public Integer getTermId() {
+        return termId;
+    }
+
+    public void setTermId(Integer termId) {
+        this.termId = termId;
+    }
 
     public String getTitle() {
         return title;
