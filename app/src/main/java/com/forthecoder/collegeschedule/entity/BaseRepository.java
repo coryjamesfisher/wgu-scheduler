@@ -94,8 +94,8 @@ public class BaseRepository<T> {
         return entityList;
     }
 
-    public T findOneByRowid(Integer rowid) throws ApplicationException {
-        List<T> entityList = queryList("SELECT * FROM " + this.clazz.getSimpleName() + " WHERE rowid=?", rowid.toString());
+    public T findOneByRowid(Long rowid) throws ApplicationException {
+        List<T> entityList = queryList("SELECT rowid, * FROM " + this.clazz.getSimpleName() + " WHERE rowid=?", rowid.toString());
 
         if (entityList.size() == 0) {
             throw new ApplicationException("Entity not found with rowid " + rowid.toString(), null);

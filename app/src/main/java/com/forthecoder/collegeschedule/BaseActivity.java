@@ -57,6 +57,10 @@ abstract class BaseActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void navigateToTarget(View view) {
+        navigateToTarget(view, null);
+    }
+
     /**
      * This method is designed for use with UI elements that
      * when clicked start a new activity. The android:tag property
@@ -64,10 +68,15 @@ abstract class BaseActivity extends AppCompatActivity {
      *
      * @param view - the clicked UI element
      */
-    public void navigateToTarget(View view) {
+    public void navigateToTarget(View view, Long rowid) {
 
         try {
             Intent intent = new Intent(this, Class.forName((String) view.getTag()));
+
+            if (rowid != null) {
+                intent.putExtra("rowid", rowid);
+            }
+
             startActivity(intent);
         } catch (ClassNotFoundException e) {
             Log.e(this.getLocalClassName(), "Couldn't find class " + view.getTag());

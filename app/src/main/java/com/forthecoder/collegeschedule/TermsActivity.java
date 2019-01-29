@@ -30,11 +30,12 @@ public class TermsActivity extends BaseActivity {
         TermRepository tr = new TermRepository(getDatabase());
         try {
             List<Term> terms = tr.findAll();
-            ListView termListView = findViewById(R.id.termsList);
+            final ListView termListView = findViewById(R.id.termsList);
 
             Map<String, Integer> fieldMap = new HashMap<>();
             fieldMap.put("rowid", R.id.termId);
             fieldMap.put("title", R.id.termTitle);
+
             termListView.setAdapter(
                     new BaseEntityArrayAdapter<>(
                             Term.class,
@@ -46,7 +47,7 @@ public class TermsActivity extends BaseActivity {
             termListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    navigateToTarget(view);
+                    navigateToTarget(view, ((Term)termListView.getItemAtPosition(position)).getRowid());
                 }
             });
 
