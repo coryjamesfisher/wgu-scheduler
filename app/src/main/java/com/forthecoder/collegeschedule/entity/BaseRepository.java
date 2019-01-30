@@ -141,7 +141,7 @@ public class BaseRepository<T> {
 
         for (FieldMap map : fieldMaps) {
 
-            if (map.getType() == Integer.class) {
+            if (map.getType() == Integer.class || map.getType() == Long.class) {
 
                 if (!map.getField().equals("rowid")) {
                     schemaSQL.append(map.getField()).append(" INTEGER,");

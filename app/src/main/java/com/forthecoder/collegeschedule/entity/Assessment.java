@@ -6,17 +6,19 @@ public class Assessment extends BaseEntity {
     private Integer courseId;
     private String type;
     private String title;
+    private String status;
     private Date goalDate;
 
     public Assessment() {
 
     }
 
-    public Assessment(Integer courseId, String type, String title, Date goalDate) {
+    public Assessment(Integer courseId, String type, String title, Date goalDate, String status) {
         this.courseId = courseId;
         this.type = type;
         this.title = title;
         this.goalDate = goalDate;
+        this.status = status;
     }
 
     public Integer getCourseId() {
@@ -49,5 +51,13 @@ public class Assessment extends BaseEntity {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

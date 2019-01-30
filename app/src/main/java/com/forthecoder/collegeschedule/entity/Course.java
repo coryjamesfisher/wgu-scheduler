@@ -15,21 +15,18 @@ public class Course extends BaseEntity {
     //(in progress, completed, dropped, plan to take)
     private String status;
 
-    private Integer mentorId;
-
     private String notes;
 
     public Course() {
 
     }
 
-    public Course(Integer termId, String title, Date startDate, Date anticipatedEndDate, String status, Integer mentorId, String notes) {
+    public Course(Integer termId, String title, Date startDate, Date anticipatedEndDate, String status, String notes) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
         this.anticipatedEndDate = anticipatedEndDate;
         this.status = status;
-        this.mentorId = mentorId;
         this.notes = notes;
     }
 
@@ -71,14 +68,6 @@ public class Course extends BaseEntity {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public Integer getMentorId() {
-        return mentorId;
-    }
-
-    public void setMentorId(Integer mentorId) {
-        this.mentorId = mentorId;
     }
 
     public String getNotes() {

@@ -58,7 +58,11 @@ abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void navigateToTarget(View view) {
-        navigateToTarget(view, null);
+        navigateToTarget(view, null, null);
+    }
+
+    public void navigateToTarget(View view, Long rowid) {
+        navigateToTarget(view, rowid, null);
     }
 
     /**
@@ -68,13 +72,17 @@ abstract class BaseActivity extends AppCompatActivity {
      *
      * @param view - the clicked UI element
      */
-    public void navigateToTarget(View view, Long rowid) {
+    public void navigateToTarget(View view, Long rowid, Long parentid) {
 
         try {
             Intent intent = new Intent(this, Class.forName((String) view.getTag()));
 
             if (rowid != null) {
                 intent.putExtra("rowid", rowid);
+            }
+
+            if (parentid != null) {
+                intent.putExtra("parentid", parentid);
             }
 
             startActivity(intent);

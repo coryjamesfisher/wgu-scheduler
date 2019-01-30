@@ -97,7 +97,7 @@
             android:text="LIST COURSES"
             android:layout_marginTop="10dp"
             android:tag="com.forthecoder.collegeschedule.CoursesActivity"
-            android:onClick="navigateToTarget"
+            android:onClick="navigateToCourses"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/termEndValue"/>

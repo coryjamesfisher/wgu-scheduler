@@ -29,25 +29,24 @@ public class AssessmentsActivity extends BaseActivity {
 
         AssessmentRepository ar = new AssessmentRepository(getDatabase());
         try {
-            List<Assessment> courses = ar.findAll();
-            ListView coursesListView = findViewById(R.id.assessmentsList);
+            List<Assessment> assessments = ar.findAllByCourseId(getIntent().getLongExtra("parentid", 0L));
+            final ListView assessmentListView = findViewById(R.id.assessmentsList);
 
             Map<String, Integer> fieldMap = new HashMap<>();
             fieldMap.put("rowid", R.id.assessmentId);
             fieldMap.put("title", R.id.assessmentTitle);
-            coursesListView.setAdapter(
+            assessmentListView.setAdapter(
                     new BaseEntityArrayAdapter<>(
                             Assessment.class,
                             this,
-                            courses,
+                            assessments,
                             fieldMap,
                             R.layout.assessments_list_item));
 
-
-            coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            assessmentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    navigateToTarget(view);
+                    navigateToTarget(view, ((Assessment)assessmentListView.getItemAtPosition(position)).getRowid());
                 }
             });
 

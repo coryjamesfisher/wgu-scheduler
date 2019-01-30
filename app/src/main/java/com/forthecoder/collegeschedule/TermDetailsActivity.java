@@ -67,4 +67,8 @@ public class TermDetailsActivity extends BaseActivity {
             }
         });
     }
+
+    public void navigateToCourses(View view) {
+        navigateToTarget(view, null, term.getRowid());
+    }
 }

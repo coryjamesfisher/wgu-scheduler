@@ -29,12 +29,13 @@ public class CoursesActivity extends BaseActivity {
 
         CourseRepository cr = new CourseRepository(getDatabase());
         try {
-            List<Course> courses = cr.findAll();
-            ListView coursesListView = findViewById(R.id.coursesList);
+            final List<Course> courses = cr.findAllByTermId(getIntent().getLongExtra("parentid", 0L));
+            final ListView coursesListView = findViewById(R.id.coursesList);
 
             Map<String, Integer> fieldMap = new HashMap<>();
             fieldMap.put("rowid", R.id.courseId);
             fieldMap.put("title", R.id.courseTitle);
+
             coursesListView.setAdapter(
                     new BaseEntityArrayAdapter<>(
                             Course.class,
@@ -47,7 +48,7 @@ public class CoursesActivity extends BaseActivity {
             coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    navigateToTarget(view);
+                navigateToTarget(view, ((Course)coursesListView.getItemAtPosition(position)).getRowid());
                 }
             });
 

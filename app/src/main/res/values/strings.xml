@@ -19,4 +19,12 @@
     <string name="mentorsTitle">MENTORS</string>
     <string name="assessmentDetailsTitle">ASSESSMENT DETAILS</string>
     <string name="menu_alerts">Alerts</string>
+    <string name="assessmentGoalDateLabel">GOAL DATE</string>
+    <string name="assessmentStatusLabel">STATUS</string>
+    <string name="assessmentTypeLabel">TYPE</string>
+    <string name="assessmentTitleLabel">TITLE</string>
+    <string name="mentorDetailsTitle">MENTOR DETAILS</string>
+    <string name="mentorFirstNameLabel">First Name</string>
+    <string name="mentorLastNameLabel">Last Name</string>
+    <string name="mentorPhoneLabel">Phone Number</string>
 </resources>

@@ -9,19 +9,21 @@ import android.widget.TextView;
 
 import com.forthecoder.collegeschedule.entity.Assessment;
 import com.forthecoder.collegeschedule.entity.AssessmentRepository;
+import com.forthecoder.collegeschedule.entity.Mentor;
+import com.forthecoder.collegeschedule.entity.MentorRepository;
 import com.forthecoder.collegeschedule.exception.ApplicationException;
 
 import java.text.DateFormat;
 
-public class AssessmentDetailsActivity extends BaseActivity {
+public class MentorDetailsActivity extends BaseActivity {
 
-    private Assessment assessment;
+    private Mentor mentor;
 
-    public AssessmentDetailsActivity() {
+    public MentorDetailsActivity() {
         super();
-        contentLayout = R.layout.activity_assessment_details;
-        actionLayout = R.layout.activity_course_details_actions;
-        Log.e("ERROR", "ASSESSMENT DETAILS ACTIVITY STARTED");
+        contentLayout = R.layout.activity_mentor_details;
+        actionLayout = R.layout.activity_mentor_details_actions;
+        Log.e("ERROR", "MENTOR DETAILS ACTIVITY STARTED");
     }
 
     @Override
@@ -29,17 +31,16 @@ public class AssessmentDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-        AssessmentRepository ar = new AssessmentRepository(getDatabase());
+        MentorRepository mr = new MentorRepository(getDatabase());
         try {
-            assessment = ar.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
+            mentor = mr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
         }
 
-        DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
-        ((TextView)findViewById(R.id.assessmentTitleValue)).setText(assessment.getTitle());
-        ((TextView)findViewById(R.id.assessmentTypeValue)).setText(assessment.getType());
-        ((TextView)findViewById(R.id.assessmentStatusValue)).setText(assessment.getStatus());
-        ((TextView)findViewById(R.id.assessmentGoalDateValue)).setText(dateFormat.format(assessment.getGoalDate()));
+        ((TextView)findViewById(R.id.mentorFirstNameValue)).setText(mentor.getFirstName());
+        ((TextView)findViewById(R.id.mentorLastNameValue)).setText(mentor.getLastName());
+        ((TextView)findViewById(R.id.mentorPhoneValue)).setText(mentor.getPhoneNumber());
+        ((TextView)findViewById(R.id.mentorEmailValue)).setText(mentor.getEmail());
 
         /*
          * @todo add course notes list items

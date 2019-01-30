@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content" android:layout_width="wrap_content"
-    tools:context=".CourseDetailsActivity">
+    tools:context=".MentorDetailsActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,13 +11,13 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <TextView
-            android:id="@+id/assessmentDetailsTitle"
+            android:id="@+id/mentorDetailsTitle"
             android:layout_width="211dp"
             android:layout_height="24dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="64dp"
             android:ems="10"
-            android:text="@string/assessmentDetailsTitle"
+            android:text="@string/mentorDetailsTitle"
             android:textAllCaps="false"
             android:textColor="@android:color/black"
             android:textSize="18sp"
@@ -26,92 +26,92 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/assessmentTitleLabel"
+            android:id="@+id/mentorFirstNameLabel"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:textSize="18sp"
-            android:text="@string/assessmentTitleLabel"
+            android:text="@string/mentorFirstNameLabel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentDetailsTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorDetailsTitle" />
 
         <TextView
-            android:id="@+id/assessmentTitleValue"
+            android:id="@+id/mentorFirstNameValue"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:text="ASSESSMENT 1"
+            android:text="Bryan"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentTitleLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorFirstNameLabel" />
 
         <TextView
-            android:id="@+id/assessmentTypeLabel"
+            android:id="@+id/mentorLastNameLabel"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:textSize="18sp"
-            android:text="@string/assessmentTypeLabel"
+            android:text="@string/mentorLastNameLabel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentTitleValue" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorFirstNameValue" />
 
         <TextView
-            android:id="@+id/assessmentTypeValue"
+            android:id="@+id/mentorLastNameValue"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:text="OBJECTIVE|PERFORMANCE"
+            android:text="Chun"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentTypeLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorLastNameLabel" />
 
         <TextView
-            android:id="@+id/assessmentStatusLabel"
+            android:id="@+id/mentorPhoneLabel"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:textSize="18sp"
-            android:text="@string/assessmentStatusLabel"
+            android:text="@string/mentorPhoneLabel"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentTypeValue" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorLastNameValue" />
 
         <TextView
-            android:id="@+id/assessmentStatusValue"
+            android:id="@+id/mentorPhoneValue"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:text="NOT TAKEN|PASSED|FAILED"
+            android:text="555-555-1234"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentStatusLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorPhoneLabel" />
 
         <TextView
-            android:id="@+id/assessmentGoalDateLabel"
+            android:id="@+id/mentorEmailLabel"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:textSize="18sp"
-            android:text="@string/assessmentGoalDateLabel"
+            android:text="Email"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentStatusValue" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorPhoneValue" />
 
         <TextView
-            android:id="@+id/assessmentGoalDateValue"
+            android:id="@+id/mentorEmailValue"
             android:layout_width="wrap_content"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:text="01/01/2019"
+            android:text="bryan.chun@wgu.edu"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/assessmentGoalDateLabel" />
+            app:layout_constraintTop_toBottomOf="@+id/mentorEmailLabel" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

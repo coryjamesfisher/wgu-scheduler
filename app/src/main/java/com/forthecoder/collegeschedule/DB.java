@@ -10,6 +10,8 @@ import com.forthecoder.collegeschedule.entity.AlertRepository;
 import com.forthecoder.collegeschedule.entity.Assessment;
 import com.forthecoder.collegeschedule.entity.AssessmentRepository;
 import com.forthecoder.collegeschedule.entity.Course;
+import com.forthecoder.collegeschedule.entity.CourseMentor;
+import com.forthecoder.collegeschedule.entity.CourseMentorRepository;
 import com.forthecoder.collegeschedule.entity.CourseRepository;
 import com.forthecoder.collegeschedule.entity.Mentor;
 import com.forthecoder.collegeschedule.entity.MentorRepository;
@@ -34,6 +36,7 @@ public class DB extends SQLiteOpenHelper {
         TermRepository termRepository = new TermRepository(db);
         CourseRepository courseRepository = new CourseRepository(db);
         MentorRepository mentorRepository = new MentorRepository(db);
+        CourseMentorRepository courseMentorRepository = new CourseMentorRepository(db);
         AssessmentRepository assessmentRepository = new AssessmentRepository(db);
         AlertRepository alertRepository = new AlertRepository(db);
 
@@ -41,6 +44,7 @@ public class DB extends SQLiteOpenHelper {
             termRepository.createSchema();
             courseRepository.createSchema();
             mentorRepository.createSchema();
+            courseMentorRepository.createSchema();
             assessmentRepository.createSchema();
             alertRepository.createSchema();
 
@@ -50,12 +54,16 @@ public class DB extends SQLiteOpenHelper {
 
             mentorRepository.insert(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
 
-            courseRepository.insert(new Course(1,"C196", now, now, "IN PROGRESS", 1, ""));
-            courseRepository.insert(new Course(1,"C198", now, now, "IN PROGRESS", 1, ""));
-            courseRepository.insert(new Course(2,"C196", now, now, "IN PROGRESS", 1, ""));
+            courseRepository.insert(new Course(1,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.insert(new Course(1,"C198", now, now, "IN PROGRESS", ""));
+            courseRepository.insert(new Course(2,"C196", now, now, "IN PROGRESS", ""));
 
-            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now));
-            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now));
+            courseMentorRepository.insert(new CourseMentor(1L, 1L));
+            courseMentorRepository.insert(new CourseMentor(2L, 1L));
+            courseMentorRepository.insert(new CourseMentor(3L, 1L));
+
+            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
+            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
 
             alertRepository.insert(new Alert(1, 1, now, "REMINDER - TAKE EXAM TODAY"));
         } catch (Exception e) {
@@ -70,6 +78,7 @@ public class DB extends SQLiteOpenHelper {
         TermRepository termRepository = new TermRepository(db);
         CourseRepository courseRepository = new CourseRepository(db);
         MentorRepository mentorRepository = new MentorRepository(db);
+        CourseMentorRepository courseMentorRepository = new CourseMentorRepository(db);
         AssessmentRepository assessmentRepository = new AssessmentRepository(db);
         AlertRepository alertRepository = new AlertRepository(db);
 
@@ -77,12 +86,14 @@ public class DB extends SQLiteOpenHelper {
             termRepository.dropSchema();
             courseRepository.dropSchema();
             mentorRepository.dropSchema();
+            courseMentorRepository.dropSchema();
             assessmentRepository.dropSchema();
             alertRepository.dropSchema();
 
             termRepository.createSchema();
             courseRepository.createSchema();
             mentorRepository.createSchema();
+            courseMentorRepository.createSchema();
             assessmentRepository.createSchema();
             alertRepository.createSchema();
         } catch (Exception e) {

@@ -3,10 +3,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:tag="com.forthecoder.collegeschedule.AlertDetailsActivity">
+    android:tag="com.forthecoder.collegeschedule.MentorDetailsActivity">
 
     <TextView
-        android:id="@+id/alertId"
+        android:id="@+id/mentorId"
         android:layout_width="25dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -16,11 +16,22 @@
         android:visibility="visible" />
 
     <TextView
-        android:id="@+id/alertText"
+        android:id="@+id/mentorFirstName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/alertId"
+        android:layout_toRightOf="@id/mentorId"
+        android:maxLines="1"
+        android:padding="3dp"
+        android:textSize="17sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mentorLastName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/mentorFirstName"
         android:maxLines="1"
         android:padding="3dp"
         android:textSize="17sp"
