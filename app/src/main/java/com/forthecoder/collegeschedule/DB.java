@@ -54,9 +54,9 @@ public class DB extends SQLiteOpenHelper {
 
             mentorRepository.insert(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
 
-            courseRepository.insert(new Course(1,"C196", now, now, "IN PROGRESS", ""));
-            courseRepository.insert(new Course(1,"C198", now, now, "IN PROGRESS", ""));
-            courseRepository.insert(new Course(2,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.insert(new Course(1L,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.insert(new Course(1L,"C198", now, now, "IN PROGRESS", ""));
+            courseRepository.insert(new Course(2L,"C196", now, now, "IN PROGRESS", ""));
 
             courseMentorRepository.insert(new CourseMentor(1L, 1L));
             courseMentorRepository.insert(new CourseMentor(2L, 1L));

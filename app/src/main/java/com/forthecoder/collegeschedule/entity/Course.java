@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Course extends BaseEntity {
 
-    private Integer termId;
+    private Long termId;
 
     private String title;
 
@@ -21,7 +21,7 @@ public class Course extends BaseEntity {
 
     }
 
-    public Course(Integer termId, String title, Date startDate, Date anticipatedEndDate, String status, String notes) {
+    public Course(Long termId, String title, Date startDate, Date anticipatedEndDate, String status, String notes) {
         this.termId = termId;
         this.title = title;
         this.startDate = startDate;
@@ -30,11 +30,11 @@ public class Course extends BaseEntity {
         this.notes = notes;
     }
 
-    public Integer getTermId() {
+    public Long getTermId() {
         return termId;
     }
 
-    public void setTermId(Integer termId) {
+    public void setTermId(Long termId) {
         this.termId = termId;
     }
 

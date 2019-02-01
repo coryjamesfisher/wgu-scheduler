@@ -1,6 +1,8 @@
 package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +21,7 @@ public class TermsActivity extends BaseActivity {
     public TermsActivity() {
         super();
         contentLayout = R.layout.activity_terms;
+        actionLayout = R.layout.activity_terms_actions;
         Log.e("ERROR", "TERMS ACTIVITY STARTED");
     }
 
@@ -48,6 +51,14 @@ public class TermsActivity extends BaseActivity {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                     navigateToTarget(view, ((Term)termListView.getItemAtPosition(position)).getRowid());
+                }
+            });
+
+            FloatingActionButton fab = findViewById(R.id.add_button);
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    navigateToTarget(view);
                 }
             });
 

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content" android:layout_width="wrap_content"
+    tools:context=".TermModificationActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <TextView
+            android:id="@+id/termDetailsTitle"
+            android:layout_width="164dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="64dp"
+            android:ems="10"
+            android:text="@string/term_details"
+            android:textAllCaps="false"
+            android:textColor="@android:color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/termTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="TITLE"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termDetailsTitle" />
+
+        <EditText
+            android:id="@+id/termTitleValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:text="FIRST TERM"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termTitleLabel" />
+
+        <TextView
+            android:id="@+id/termStartLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="TERM START"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termTitleValue" />
+
+        <EditText
+            android:id="@+id/termStartValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:inputType="date"
+            android:text="01/01/2018"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termStartLabel" />
+
+        <TextView
+            android:id="@+id/termEndLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="TERM END"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termStartValue" />
+
+        <EditText
+            android:id="@+id/termEndValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            android:inputType="date"
+            android:text="01/01/2019"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termEndLabel" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="156dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/termEndValue"
+            android:onClick="save"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v4.widget.NestedScrollView>

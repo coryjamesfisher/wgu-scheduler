@@ -1,6 +1,7 @@
 package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,9 +17,12 @@ import java.util.Map;
 
 public class CoursesActivity extends BaseActivity {
 
+    private Long termId;
+
     public CoursesActivity() {
         super();
         contentLayout = R.layout.activity_courses;
+        actionLayout = R.layout.activity_courses_actions;
         Log.e("ERROR", "COURSES ACTIVITY STARTED");
     }
 
@@ -29,7 +33,8 @@ public class CoursesActivity extends BaseActivity {
 
         CourseRepository cr = new CourseRepository(getDatabase());
         try {
-            final List<Course> courses = cr.findAllByTermId(getIntent().getLongExtra("parentid", 0L));
+            termId = getIntent().getLongExtra("parentid", 0L);
+            final List<Course> courses = cr.findAllByTermId(termId);
             final ListView coursesListView = findViewById(R.id.coursesList);
 
             Map<String, Integer> fieldMap = new HashMap<>();
@@ -55,5 +60,13 @@ public class CoursesActivity extends BaseActivity {
         } catch (ApplicationException e) {
             Log.e("ERROR", e.toString());
         }
+
+        FloatingActionButton fab = findViewById(R.id.add_button);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToTarget(view, null, termId);
+            }
+        });
     }
 }
