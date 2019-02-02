@@ -67,6 +67,8 @@ public class FieldMap {
             return cursor.getString(cursor.getColumnIndex(this.getField()));
         } else if (type == Date.class) {
             return new Date(cursor.getLong(cursor.getColumnIndex(this.getField())));
+        } else if (type.isEnum()) {
+            return Enum.valueOf(type, cursor.getString(cursor.getColumnIndex(this.getField())));
         } else {
             throw new ApplicationException("Unrecognized type while mapping database values.", null);
         }

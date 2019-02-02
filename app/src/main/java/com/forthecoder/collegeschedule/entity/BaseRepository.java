@@ -204,7 +204,7 @@ public class BaseRepository<T> {
                 if (!map.getField().equals("rowid")) {
                     schemaSQL.append(map.getField()).append(" INTEGER,");
                 }
-            } else if (map.getType() == String.class || map.getType() == Date.class) {
+            } else if (map.getType() == String.class || map.getType() == Date.class || map.getType().isEnum()) {
                 schemaSQL.append(map.getField()).append(" TEXT,");
             }
         }

@@ -81,7 +81,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/courseStartValue" />
 
-        <TextView
+        <EditText
             android:id="@+id/courseEndValue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -92,6 +92,28 @@
             android:text="01/01/2019"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/courseEndLabel" />
+
+        <Switch
+            android:id="@+id/startAlertEnabledValue"
+            android:layout_width="82dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="12dp"
+            android:switchPadding="8dp"
+            android:text="Alert"
+            app:layout_constraintStart_toEndOf="@+id/courseStartValue"
+            app:layout_constraintTop_toTopOf="@+id/courseStartValue" />
+
+        <Switch
+            android:id="@+id/endAlertEnabledValue"
+            android:layout_width="82dp"
+            android:layout_height="28dp"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="90dp"
+            android:switchPadding="8dp"
+            android:text="Alert"
+            app:layout_constraintStart_toEndOf="@+id/courseEndValue"
+            app:layout_constraintTop_toBottomOf="@+id/startAlertEnabledValue" />
 
         <TextView
             android:id="@+id/courseStatusLabel"

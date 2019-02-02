@@ -7,8 +7,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.forthecoder.collegeschedule.entity.Alert;
+import com.forthecoder.collegeschedule.entity.AlertRepository;
 import com.forthecoder.collegeschedule.entity.Assessment;
 import com.forthecoder.collegeschedule.entity.AssessmentRepository;
 import com.forthecoder.collegeschedule.exception.ApplicationException;
@@ -24,6 +27,7 @@ public class AssessmentModificationActivity extends BaseActivity {
     private static final String[] STATUSES = {"NOT TAKEN", "PASSED", "FAILED"};
     private static final String[] TYPES = {"OBJECTIVE ASSESSMENT", "PERFORMANCE ASSESSMENT"};
     private Assessment assessment;
+    private Alert end;
 
     public AssessmentModificationActivity() {
         super();
@@ -43,10 +47,17 @@ public class AssessmentModificationActivity extends BaseActivity {
             assessment = new Assessment();
             assessment.setCourseId(parentId);
             assessment.setGoalDate(Calendar.getInstance().getTime());
+            end = new Alert();
         } else {
             AssessmentRepository ar = new AssessmentRepository(getDatabase());
             try {
                 assessment = ar.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
+
+                AlertRepository alertRepository = new AlertRepository(getDatabase());
+                end = alertRepository.findOneByAssessmentAndType(assessment.getRowid(), Alert.ALERT_TYPE.END);
+                if (end == null) {
+                    end = new Alert();
+                }
             } catch (ApplicationException e) {
             }
         }
@@ -76,6 +87,8 @@ public class AssessmentModificationActivity extends BaseActivity {
             int typeIndex = Arrays.asList(TYPES).indexOf(assessment.getType());
             assessmentTypeSelect.setSelection(typeIndex);
         }
+
+        ((Switch)findViewById(R.id.endAlertEnabledValue)).setChecked(end.getRowid() != 0L);
     }
 
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
@@ -91,6 +104,19 @@ public class AssessmentModificationActivity extends BaseActivity {
 
         AssessmentRepository assessmentRepository = new AssessmentRepository(getDatabase());
         assessmentRepository.save(assessment);
+
+        AlertRepository alertRepository = new AlertRepository(getDatabase());
+        boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
+        if (endAlertEnabled && end.getRowid() == 0L) {
+            end.setCourseId(assessment.getCourseId());
+            end.setAssessmentId(assessment.getRowid());
+            end.setType(Alert.ALERT_TYPE.END);
+            end.setDate(assessment.getGoalDate());
+            end.setText(assessment.getTitle() + " starts today!");
+            alertRepository.save(end);
+        } else if (!endAlertEnabled && end.getRowid() != 0L) {
+            alertRepository.delete(end);
+        }
 
         if (isInsert) {
             navigateToTarget(AssessmentsActivity.class, null, assessment.getCourseId());

@@ -5,8 +5,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.forthecoder.collegeschedule.entity.Alert;
+import com.forthecoder.collegeschedule.entity.AlertRepository;
 import com.forthecoder.collegeschedule.entity.Term;
 import com.forthecoder.collegeschedule.entity.TermRepository;
 import com.forthecoder.collegeschedule.exception.ApplicationException;
@@ -20,6 +23,9 @@ import java.util.Calendar;
 public class TermModificationActivity extends BaseActivity {
 
     private Term term;
+    private Alert start;
+    private Alert end;
+
     public TermModificationActivity() {
         super();
         contentLayout = R.layout.activity_term_modification;
@@ -39,10 +45,23 @@ public class TermModificationActivity extends BaseActivity {
             term = new Term();
             term.setStartDate(Calendar.getInstance().getTime());
             term.setEndDate(Calendar.getInstance().getTime());
+            start = new Alert();
+            end = new Alert();
         } else {
             TermRepository tr = new TermRepository(getDatabase());
             try {
                 term = tr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
+                AlertRepository alertRepository = new AlertRepository(getDatabase());
+                start = alertRepository.findOneByTermAndType(term.getRowid(), Alert.ALERT_TYPE.START);
+                end = alertRepository.findOneByTermAndType(term.getRowid(), Alert.ALERT_TYPE.END);
+
+                if (start == null) {
+                    start = new Alert();
+                }
+
+                if (end == null) {
+                    end = new Alert();
+                }
             } catch (ApplicationException e) {
             }
         }
@@ -51,6 +70,9 @@ public class TermModificationActivity extends BaseActivity {
         ((TextView)findViewById(R.id.termTitleValue)).setText(term.getTitle());
         ((TextView)findViewById(R.id.termStartValue)).setText(dateFormat.format(term.getStartDate()));
         ((TextView)findViewById(R.id.termEndValue)).setText(dateFormat.format(term.getEndDate()));
+
+        ((Switch)findViewById(R.id.startAlertEnabledValue)).setChecked(start.getRowid() != 0L);
+        ((Switch)findViewById(R.id.endAlertEnabledValue)).setChecked(end.getRowid() != 0L);
     }
 
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
@@ -64,6 +86,29 @@ public class TermModificationActivity extends BaseActivity {
         boolean isInsert = term.getRowid() == 0L;
         TermRepository termRepository = new TermRepository(getDatabase());
         termRepository.save(term);
+
+        AlertRepository alertRepository = new AlertRepository(getDatabase());
+        boolean startAlertEnabled = ((Switch)findViewById(R.id.startAlertEnabledValue)).isChecked();
+        boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
+        if (startAlertEnabled && start.getRowid() == 0L) {
+            start.setTermId(term.getRowid());
+            start.setType(Alert.ALERT_TYPE.START);
+            start.setDate(term.getStartDate());
+            start.setText(term.getTitle() + " starts today!");
+            alertRepository.save(start);
+        } else if (!startAlertEnabled && start.getRowid() != 0L) {
+            alertRepository.delete(start);
+        }
+
+        if (endAlertEnabled && end.getRowid() == 0L) {
+            end.setTermId(term.getRowid());
+            end.setType(Alert.ALERT_TYPE.END);
+            end.setDate(term.getEndDate());
+            end.setText(term.getTitle() + " ends today!");
+            alertRepository.save(end);
+        } else if (!endAlertEnabled && end.getRowid() != 0L) {
+            alertRepository.delete(end);
+        }
 
         if (isInsert) {
             navigateToTarget(TermsActivity.class);

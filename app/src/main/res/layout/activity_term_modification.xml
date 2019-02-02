@@ -107,6 +107,28 @@
             app:layout_constraintTop_toBottomOf="@+id/termEndValue"
             android:onClick="save"/>
 
+        <Switch
+            android:id="@+id/startAlertEnabledValue"
+            android:layout_width="87dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:switchPadding="1dp"
+            android:text="Alert"
+            app:layout_constraintStart_toEndOf="@+id/termStartValue"
+            app:layout_constraintTop_toBottomOf="@+id/termStartLabel" />
+
+        <Switch
+            android:id="@+id/endAlertEnabledValue"
+            android:layout_width="82dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="92dp"
+            android:switchPadding="1dp"
+            android:text="Alert"
+            app:layout_constraintStart_toEndOf="@+id/termEndValue"
+            app:layout_constraintTop_toBottomOf="@+id/startAlertEnabledValue" />
+
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

@@ -65,7 +65,7 @@ public class DB extends SQLiteOpenHelper {
             assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
             assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
 
-            alertRepository.save(new Alert(1L, 1L, now, "REMINDER - TAKE EXAM TODAY"));
+//            alertRepository.save(new Alert(1L, 1L, 1L, now, Alert.ALERT_TYPE.START, "BOGUS ALERT"));
         } catch (Exception e) {
             // ignore
             Log.e("ERROR", e.toString());

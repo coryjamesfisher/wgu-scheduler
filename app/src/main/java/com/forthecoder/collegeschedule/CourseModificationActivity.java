@@ -8,8 +8,11 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.forthecoder.collegeschedule.entity.Alert;
+import com.forthecoder.collegeschedule.entity.AlertRepository;
 import com.forthecoder.collegeschedule.entity.Course;
 import com.forthecoder.collegeschedule.entity.CourseRepository;
 import com.forthecoder.collegeschedule.exception.ApplicationException;
@@ -23,6 +26,9 @@ import java.util.Calendar;
 public class CourseModificationActivity extends BaseActivity {
 
     private Course course;
+    private Alert start;
+    private Alert end;
+
     private static final String[] STATUSES = new String[] {
             "IN PROGRESS", "COMPLETED", "DROPPED", "PLAN TO TAKE"
     };
@@ -46,10 +52,24 @@ public class CourseModificationActivity extends BaseActivity {
             course.setTermId(parentId);
             course.setStartDate(Calendar.getInstance().getTime());
             course.setAnticipatedEndDate(Calendar.getInstance().getTime());
+            start = new Alert();
+            end = new Alert();
         } else {
             CourseRepository cr = new CourseRepository(getDatabase());
             try {
                 course = cr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
+
+                AlertRepository alertRepository = new AlertRepository(getDatabase());
+                start = alertRepository.findOneByCourseAndType(course.getRowid(), Alert.ALERT_TYPE.START);
+                end = alertRepository.findOneByCourseAndType(course.getRowid(), Alert.ALERT_TYPE.END);
+
+                if (start == null) {
+                    start = new Alert();
+                }
+
+                if (end == null) {
+                    end = new Alert();
+                }
             } catch (ApplicationException e) {
             }
         }
@@ -69,6 +89,9 @@ public class CourseModificationActivity extends BaseActivity {
             int statusIndex = Arrays.asList(STATUSES).indexOf(course.getStatus());
             courseStatusSelect.setSelection(statusIndex);
         }
+
+        ((Switch)findViewById(R.id.startAlertEnabledValue)).setChecked(start.getRowid() != 0L);
+        ((Switch)findViewById(R.id.endAlertEnabledValue)).setChecked(end.getRowid() != 0L);
     }
 
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
@@ -85,6 +108,31 @@ public class CourseModificationActivity extends BaseActivity {
 
         CourseRepository courseRepository = new CourseRepository(getDatabase());
         courseRepository.save(course);
+
+        AlertRepository alertRepository = new AlertRepository(getDatabase());
+        boolean startAlertEnabled = ((Switch)findViewById(R.id.startAlertEnabledValue)).isChecked();
+        boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
+        if (startAlertEnabled && start.getRowid() == 0L) {
+            start.setTermId(course.getTermId());
+            start.setCourseId(course.getRowid());
+            start.setType(Alert.ALERT_TYPE.START);
+            start.setDate(course.getStartDate());
+            start.setText(course.getTitle() + " starts today!");
+            alertRepository.save(start);
+        } else if (!startAlertEnabled && start.getRowid() != 0L) {
+            alertRepository.delete(start);
+        }
+
+        if (endAlertEnabled && end.getRowid() == 0L) {
+            end.setTermId(course.getTermId());
+            end.setCourseId(course.getRowid());
+            end.setType(Alert.ALERT_TYPE.END);
+            end.setDate(course.getAnticipatedEndDate());
+            end.setText(course.getTitle() + " ends today!");
+            alertRepository.save(end);
+        } else if (!endAlertEnabled && end.getRowid() != 0L) {
+            alertRepository.delete(end);
+        }
 
         if (isInsert) {
             navigateToTarget(CoursesActivity.class, null, course.getTermId());
