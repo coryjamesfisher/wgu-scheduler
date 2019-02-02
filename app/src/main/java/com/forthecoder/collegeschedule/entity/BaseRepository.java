@@ -139,6 +139,11 @@ public class BaseRepository<T> {
         try {
             Log.e("ERROR", insertSQL.toString());
             dbConnection.execSQL(insertSQL.toString(), values.toArray());
+
+            // Set the last inserted rowid to the object.
+            Cursor cursor = dbConnection.rawQuery("SELECT last_insert_rowid()", new String[0]);
+            cursor.moveToNext();
+            ((BaseEntity) obj).setRowid(cursor.getLong(0));
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);
         }

@@ -44,6 +44,8 @@
         <activity android:name=".MentorDetailsActivity" />
         <activity android:name=".TermModificationActivity" />
         <activity android:name=".CourseModificationActivity" />
+        <activity android:name=".AssessmentModificationActivity" />
+        <activity android:name=".MentorModificationActivity" />
     </application>
 
 </manifest>

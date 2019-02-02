@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content" android:layout_width="wrap_content"
-    tools:context=".AssessmentDetailsActivity">
+    tools:context=".AssessmentModificationActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -36,10 +36,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/assessmentDetailsTitle" />
 
-        <TextView
+        <EditText
             android:id="@+id/assessmentTitleValue"
             android:layout_width="wrap_content"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
@@ -58,10 +58,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/assessmentTitleValue" />
 
-        <TextView
+        <Spinner
             android:id="@+id/assessmentTypeValue"
             android:layout_width="wrap_content"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
@@ -80,10 +80,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/assessmentTypeValue" />
 
-        <TextView
+        <Spinner
             android:id="@+id/assessmentStatusValue"
             android:layout_width="wrap_content"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
@@ -102,16 +102,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/assessmentStatusValue" />
 
-        <TextView
+        <EditText
             android:id="@+id/assessmentGoalDateValue"
             android:layout_width="wrap_content"
-            android:layout_height="27dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
-            android:text="01/01/2019"
+            android:inputType="date"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/assessmentGoalDateLabel" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="Save"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/assessmentGoalDateValue"
+            android:onClick="save"/>
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

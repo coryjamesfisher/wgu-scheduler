@@ -62,10 +62,10 @@ public class DB extends SQLiteOpenHelper {
             courseMentorRepository.save(new CourseMentor(2L, 1L));
             courseMentorRepository.save(new CourseMentor(3L, 1L));
 
-            assessmentRepository.save(new Assessment(1, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
-            assessmentRepository.save(new Assessment(1, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
+            assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
+            assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
 
-            alertRepository.save(new Alert(1, 1, now, "REMINDER - TAKE EXAM TODAY"));
+            alertRepository.save(new Alert(1L, 1L, now, "REMINDER - TAKE EXAM TODAY"));
         } catch (Exception e) {
             // ignore
             Log.e("ERROR", e.toString());

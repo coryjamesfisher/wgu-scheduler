@@ -3,7 +3,7 @@ package com.forthecoder.collegeschedule.entity;
 import java.util.Date;
 
 public class Assessment extends BaseEntity {
-    private Integer courseId;
+    private Long courseId = 0L;
     private String type;
     private String title;
     private String status;
@@ -13,7 +13,7 @@ public class Assessment extends BaseEntity {
 
     }
 
-    public Assessment(Integer courseId, String type, String title, Date goalDate, String status) {
+    public Assessment(Long courseId, String type, String title, Date goalDate, String status) {
         this.courseId = courseId;
         this.type = type;
         this.title = title;
@@ -21,11 +21,11 @@ public class Assessment extends BaseEntity {
         this.status = status;
     }
 
-    public Integer getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 

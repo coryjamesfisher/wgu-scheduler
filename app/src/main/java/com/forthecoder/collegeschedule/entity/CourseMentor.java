@@ -1,8 +1,8 @@
 package com.forthecoder.collegeschedule.entity;
 
 public class CourseMentor extends BaseEntity {
-    private Long courseId;
-    private Long mentorId;
+    private Long courseId = 0L;
+    private Long mentorId = 0L;
     
     public CourseMentor() {
         

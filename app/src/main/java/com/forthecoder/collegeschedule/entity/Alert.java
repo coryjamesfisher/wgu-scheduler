@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class Alert extends BaseEntity {
 
-    private Integer courseId;
-    private Integer assessmentId;
+    private Long courseId = 0L;
+    private Long assessmentId = 0L;
     private Date date;
     private String text;
 
@@ -13,26 +13,26 @@ public class Alert extends BaseEntity {
 
     }
 
-    public Alert(Integer courseId, Integer assessmentId, Date date, String text) {
+    public Alert(Long courseId, Long assessmentId, Date date, String text) {
         this.courseId = courseId;
         this.assessmentId = assessmentId;
         this.date = date;
         this.text = text;
     }
 
-    public Integer getCourseId() {
+    public Long getCourseId() {
         return courseId;
     }
 
-    public void setCourseId(Integer courseId) {
+    public void setCourseId(Long courseId) {
         this.courseId = courseId;
     }
 
-    public Integer getAssessmentId() {
+    public Long getAssessmentId() {
         return assessmentId;
     }
 
-    public void setAssessmentId(Integer assessmentId) {
+    public void setAssessmentId(Long assessmentId) {
         this.assessmentId = assessmentId;
     }
 

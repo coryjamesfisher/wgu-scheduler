@@ -2,7 +2,6 @@ package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -20,14 +19,13 @@ public class AssessmentDetailsActivity extends BaseActivity {
     public AssessmentDetailsActivity() {
         super();
         contentLayout = R.layout.activity_assessment_details;
-        actionLayout = R.layout.activity_course_details_actions;
+        actionLayout = R.layout.activity_assessment_details_actions;
         Log.e("ERROR", "ASSESSMENT DETAILS ACTIVITY STARTED");
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         AssessmentRepository ar = new AssessmentRepository(getDatabase());
         try {
@@ -49,8 +47,7 @@ public class AssessmentDetailsActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                navigateToTarget(view, assessment.getRowid());
             }
         });
 
@@ -58,8 +55,6 @@ public class AssessmentDetailsActivity extends BaseActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
 
@@ -67,8 +62,6 @@ public class AssessmentDetailsActivity extends BaseActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
             }
         });
     }

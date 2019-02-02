@@ -29,6 +29,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="8dp"
             android:src="@drawable/ic_edit_icon"
+            android:tag="com.forthecoder.collegeschedule.AssessmentModificationActivity"
             app:layout_constraintStart_toEndOf="@id/remove_button"
             app:layout_constraintBottom_toBottomOf="parent"
             />

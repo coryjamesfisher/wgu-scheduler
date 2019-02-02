@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Course extends BaseEntity {
 
-    private Long termId;
+    private Long termId = 0L;
 
     private String title;
 
