@@ -49,23 +49,23 @@ public class DB extends SQLiteOpenHelper {
             alertRepository.createSchema();
 
             Date now = Calendar.getInstance().getTime();
-            termRepository.insert(new Term("TERM 1", now, now));
-            termRepository.insert(new Term("TERM 2", now, now));
+            termRepository.save(new Term("TERM 1", now, now));
+            termRepository.save(new Term("TERM 2", now, now));
 
-            mentorRepository.insert(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
+            mentorRepository.save(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
 
-            courseRepository.insert(new Course(1L,"C196", now, now, "IN PROGRESS", ""));
-            courseRepository.insert(new Course(1L,"C198", now, now, "IN PROGRESS", ""));
-            courseRepository.insert(new Course(2L,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.save(new Course(1L,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.save(new Course(1L,"C198", now, now, "IN PROGRESS", ""));
+            courseRepository.save(new Course(2L,"C196", now, now, "IN PROGRESS", ""));
 
-            courseMentorRepository.insert(new CourseMentor(1L, 1L));
-            courseMentorRepository.insert(new CourseMentor(2L, 1L));
-            courseMentorRepository.insert(new CourseMentor(3L, 1L));
+            courseMentorRepository.save(new CourseMentor(1L, 1L));
+            courseMentorRepository.save(new CourseMentor(2L, 1L));
+            courseMentorRepository.save(new CourseMentor(3L, 1L));
 
-            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
-            assessmentRepository.insert(new Assessment(1, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
+            assessmentRepository.save(new Assessment(1, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
+            assessmentRepository.save(new Assessment(1, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
 
-            alertRepository.insert(new Alert(1, 1, now, "REMINDER - TAKE EXAM TODAY"));
+            alertRepository.save(new Alert(1, 1, now, "REMINDER - TAKE EXAM TODAY"));
         } catch (Exception e) {
             // ignore
             Log.e("ERROR", e.toString());

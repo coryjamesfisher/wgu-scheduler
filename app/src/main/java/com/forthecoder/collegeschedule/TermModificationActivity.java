@@ -61,12 +61,14 @@ public class TermModificationActivity extends BaseActivity {
         term.setStartDate(dateFormat.parse(((TextView)findViewById(R.id.termStartValue)).getText().toString()));
         term.setEndDate(dateFormat.parse(((TextView)findViewById(R.id.termEndValue)).getText().toString()));
 
+        boolean isInsert = term.getRowid() == 0L;
         TermRepository termRepository = new TermRepository(getDatabase());
-        if (term.getRowid() == null) {
-            termRepository.insert(term);
+        termRepository.save(term);
+
+        if (isInsert) {
+            navigateToTarget(TermsActivity.class);
         } else {
-            // @todo address updates
-            throw new UnsupportedOperationException("Update is not supported yet.");
+            navigateToTarget(TermDetailsActivity.class, term.getRowid());
         }
     }
 }

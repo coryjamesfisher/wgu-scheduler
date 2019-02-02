@@ -81,12 +81,15 @@ public class CourseModificationActivity extends BaseActivity {
         course.setStatus(((Spinner)findViewById(R.id.courseStatusValue)).getSelectedItem().toString());
         course.setNotes("");
 
+        boolean isInsert = course.getRowid() == 0L;
+
         CourseRepository courseRepository = new CourseRepository(getDatabase());
-        if (course.getRowid() == null) {
-            courseRepository.insert(course);
+        courseRepository.save(course);
+
+        if (isInsert) {
+            navigateToTarget(CoursesActivity.class, null, course.getTermId());
         } else {
-            // @todo address updates
-            throw new UnsupportedOperationException("Update is not supported yet.");
+            navigateToTarget(CourseDetailsActivity.class, course.getRowid());
         }
     }
 }

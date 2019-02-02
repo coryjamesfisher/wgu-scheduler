@@ -65,6 +65,22 @@ abstract class BaseActivity extends AppCompatActivity {
         navigateToTarget(view, rowid, null);
     }
 
+    public void navigateToTarget(View view, Long rowid, Long parentid) {
+        try {
+            navigateToTarget(Class.forName((String) view.getTag()), rowid, parentid);
+        } catch (ClassNotFoundException e) {
+            Log.e(this.getLocalClassName(), "Couldn't find class " + view.getTag());
+        }
+    }
+
+    public void navigateToTarget(Class clazz) {
+        navigateToTarget(clazz, null, null);
+    }
+
+    public void navigateToTarget(Class clazz, Long rowid) {
+        navigateToTarget(clazz, rowid, null);
+    }
+
     /**
      * This method is designed for use with UI elements that
      * when clicked start a new activity. The android:tag property
@@ -72,23 +88,19 @@ abstract class BaseActivity extends AppCompatActivity {
      *
      * @param view - the clicked UI element
      */
-    public void navigateToTarget(View view, Long rowid, Long parentid) {
+    public void navigateToTarget(Class clazz, Long rowid, Long parentid) {
 
-        try {
-            Intent intent = new Intent(this, Class.forName((String) view.getTag()));
+        Intent intent = new Intent(this, clazz);
 
-            if (rowid != null) {
-                intent.putExtra("rowid", rowid);
-            }
-
-            if (parentid != null) {
-                intent.putExtra("parentid", parentid);
-            }
-
-            startActivity(intent);
-        } catch (ClassNotFoundException e) {
-            Log.e(this.getLocalClassName(), "Couldn't find class " + view.getTag());
+        if (rowid != null) {
+            intent.putExtra("rowid", rowid);
         }
+
+        if (parentid != null) {
+            intent.putExtra("parentid", parentid);
+        }
+
+        startActivity(intent);
     }
 
     @Override

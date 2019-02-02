@@ -2,7 +2,7 @@ package com.forthecoder.collegeschedule.entity;
 
 class BaseEntity {
 
-    private Long rowid;
+    private Long rowid = 0L;
 
     public Long getRowid() {
         return rowid;

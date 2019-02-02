@@ -104,7 +104,16 @@ public class BaseRepository<T> {
         return entityList.get(0);
     }
 
-    public void insert(T obj) throws InvocationTargetException, IllegalAccessException, ApplicationException {
+    public void save(T obj) throws InvocationTargetException, IllegalAccessException, ApplicationException {
+
+        if (((BaseEntity)obj).getRowid() == 0L) {
+            insert(obj);
+        } else {
+            update(obj);
+        }
+    }
+
+    private void insert(T obj) throws InvocationTargetException, IllegalAccessException, ApplicationException {
 
         StringBuilder insertSQL = new StringBuilder("INSERT INTO " + clazz.getSimpleName() + "(");
 
@@ -130,6 +139,40 @@ public class BaseRepository<T> {
         try {
             Log.e("ERROR", insertSQL.toString());
             dbConnection.execSQL(insertSQL.toString(), values.toArray());
+        } catch (SQLException e) {
+            throw new ApplicationException("A system error has occurred.", e);
+        }
+    }
+
+    private void update(T obj) throws InvocationTargetException, IllegalAccessException, ApplicationException {
+
+        StringBuilder updateSQL = new StringBuilder("UPDATE " + clazz.getSimpleName() + " SET ");
+
+        List<Object> values = new ArrayList<>();
+
+        Long rowid = null;
+        for (FieldMap fieldMap : this.fieldMaps) {
+
+            if (fieldMap.getField().equals("rowid")) {
+                rowid = (Long) fieldMap.getGetterMethod().invoke(obj);
+                continue;
+            }
+            updateSQL.append(fieldMap.getField()).append(" = ?,");
+            values.add(fieldMap.getGetterMethod().invoke(obj));
+        }
+
+        if (rowid == null) {
+            throw new IllegalArgumentException("Rowid is required for updates.");
+        }
+
+        values.add(rowid);
+
+        updateSQL.deleteCharAt(updateSQL.length() - 1);
+        updateSQL.append(" WHERE rowid = ?;");
+
+        try {
+            Log.e("ERROR", updateSQL.toString());
+            dbConnection.execSQL(updateSQL.toString(), values.toArray());
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);
         }
