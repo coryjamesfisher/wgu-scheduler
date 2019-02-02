@@ -29,7 +29,7 @@ public class TermDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-        TermRepository tr = new TermRepository(getDatabase());
+        final TermRepository tr = new TermRepository(getDatabase());
         try {
             term = tr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
@@ -52,12 +52,16 @@ public class TermDetailsActivity extends BaseActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    tr.delete(term);
+                    navigateToTarget(TermsActivity.class);
+                } catch (ApplicationException ignored) {
+                }
             }
         });
 
         FloatingActionButton fab3 = findViewById(R.id.list_alerts_button);
-        fab2.setOnClickListener(new View.OnClickListener() {
+        fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

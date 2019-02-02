@@ -16,6 +16,7 @@ import java.text.DateFormat;
 public class CourseDetailsActivity extends BaseActivity {
 
     private Course course;
+    private Long termId;
 
     public CourseDetailsActivity() {
         super();
@@ -29,11 +30,12 @@ public class CourseDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
 
-        CourseRepository cr = new CourseRepository(getDatabase());
+        final CourseRepository cr = new CourseRepository(getDatabase());
         try {
             course = cr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
         }
+        termId = getIntent().getLongExtra("parentid", 0L);
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         ((TextView)findViewById(R.id.courseTitleValue)).setText(course.getTitle());
@@ -57,12 +59,16 @@ public class CourseDetailsActivity extends BaseActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                try {
+                    cr.delete(course);
+                    navigateToTarget(CoursesActivity.class, null, termId);
+                } catch (ApplicationException ignored) {
+                }
             }
         });
 
         FloatingActionButton fab3 = findViewById(R.id.list_alerts_button);
-        fab2.setOnClickListener(new View.OnClickListener() {
+        fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 

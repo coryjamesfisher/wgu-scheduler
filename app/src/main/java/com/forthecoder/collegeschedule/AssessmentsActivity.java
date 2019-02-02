@@ -51,7 +51,7 @@ public class AssessmentsActivity extends BaseActivity {
             assessmentListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    navigateToTarget(view, ((Assessment)assessmentListView.getItemAtPosition(position)).getRowid());
+                    navigateToTarget(view, ((Assessment)assessmentListView.getItemAtPosition(position)).getRowid(), courseId);
                 }
             });
 

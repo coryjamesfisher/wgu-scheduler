@@ -2,22 +2,18 @@ package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.forthecoder.collegeschedule.entity.Assessment;
-import com.forthecoder.collegeschedule.entity.AssessmentRepository;
 import com.forthecoder.collegeschedule.entity.Mentor;
 import com.forthecoder.collegeschedule.entity.MentorRepository;
 import com.forthecoder.collegeschedule.exception.ApplicationException;
 
-import java.text.DateFormat;
-
 public class MentorDetailsActivity extends BaseActivity {
 
     private Mentor mentor;
+    private Long courseId;
 
     public MentorDetailsActivity() {
         super();
@@ -30,11 +26,12 @@ public class MentorDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        MentorRepository mr = new MentorRepository(getDatabase());
+        final MentorRepository mr = new MentorRepository(getDatabase());
         try {
             mentor = mr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
         }
+        courseId = getIntent().getLongExtra("parentid", 0L);
 
         ((TextView)findViewById(R.id.mentorFirstNameValue)).setText(mentor.getFirstName());
         ((TextView)findViewById(R.id.mentorLastNameValue)).setText(mentor.getLastName());
@@ -57,11 +54,16 @@ public class MentorDetailsActivity extends BaseActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    mr.delete(mentor);
+                    navigateToTarget(MentorsActivity.class, null, courseId);
+                } catch (ApplicationException ignored) {
+                }
             }
         });
 
         FloatingActionButton fab3 = findViewById(R.id.list_alerts_button);
-        fab2.setOnClickListener(new View.OnClickListener() {
+        fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }

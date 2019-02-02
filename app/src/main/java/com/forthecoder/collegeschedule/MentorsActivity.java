@@ -64,7 +64,7 @@ public class MentorsActivity extends BaseActivity {
             mentorsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    navigateToTarget(view, ((Mentor)mentorsListView.getItemAtPosition(position)).getRowid());
+                    navigateToTarget(view, ((Mentor)mentorsListView.getItemAtPosition(position)).getRowid(), courseId);
                 }
             });
 

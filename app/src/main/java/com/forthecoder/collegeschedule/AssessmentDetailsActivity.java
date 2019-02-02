@@ -15,6 +15,7 @@ import java.text.DateFormat;
 public class AssessmentDetailsActivity extends BaseActivity {
 
     private Assessment assessment;
+    private Long courseId;
 
     public AssessmentDetailsActivity() {
         super();
@@ -27,11 +28,12 @@ public class AssessmentDetailsActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        AssessmentRepository ar = new AssessmentRepository(getDatabase());
+        final AssessmentRepository ar = new AssessmentRepository(getDatabase());
         try {
             assessment = ar.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
         }
+        courseId = getIntent().getLongExtra("parentid", 0L);
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         ((TextView)findViewById(R.id.assessmentTitleValue)).setText(assessment.getTitle());
@@ -55,11 +57,16 @@ public class AssessmentDetailsActivity extends BaseActivity {
         fab2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                try {
+                    ar.delete(assessment);
+                    navigateToTarget(AssessmentsActivity.class, null, courseId);
+                } catch (ApplicationException ignored) {
+                }
             }
         });
 
         FloatingActionButton fab3 = findViewById(R.id.list_alerts_button);
-        fab2.setOnClickListener(new View.OnClickListener() {
+        fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             }

@@ -53,7 +53,7 @@ public class CoursesActivity extends BaseActivity {
             coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                navigateToTarget(view, ((Course)coursesListView.getItemAtPosition(position)).getRowid());
+                navigateToTarget(view, ((Course)coursesListView.getItemAtPosition(position)).getRowid(), termId);
                 }
             });
 

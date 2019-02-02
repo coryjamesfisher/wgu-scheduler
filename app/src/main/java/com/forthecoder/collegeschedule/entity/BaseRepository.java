@@ -183,6 +183,16 @@ public class BaseRepository<T> {
         }
     }
 
+    public void delete(T obj) throws ApplicationException {
+        String deleteSQL = "DELETE FROM " + clazz.getSimpleName() + " WHERE rowid = ?;";
+        try {
+            Log.e("ERROR", deleteSQL);
+            dbConnection.execSQL(deleteSQL, new Object[]{((BaseEntity)obj).getRowid()});
+        } catch (SQLException e) {
+            throw new ApplicationException("A system error has occurred.", e);
+        }
+    }
+
     public void createSchema() throws ApplicationException {
 
         StringBuilder schemaSQL = new StringBuilder("CREATE TABLE " + clazz.getSimpleName() + " (");
