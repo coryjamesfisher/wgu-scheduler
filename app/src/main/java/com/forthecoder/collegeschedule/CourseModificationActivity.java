@@ -109,7 +109,19 @@ public class CourseModificationActivity extends BaseActivity {
         CourseRepository courseRepository = new CourseRepository(getDatabase());
         courseRepository.save(course);
 
-        AlertRepository alertRepository = new AlertRepository(getDatabase());
+        handleAlerts();
+
+        if (isInsert) {
+            navigateToTarget(CoursesActivity.class, null, course.getTermId());
+        } else {
+            navigateToTarget(CourseDetailsActivity.class, course.getRowid());
+        }
+    }
+
+    private void handleAlerts() throws InvocationTargetException, IllegalAccessException, ApplicationException {
+
+        AlertService alertService = new AlertService(this);
+
         boolean startAlertEnabled = ((Switch)findViewById(R.id.startAlertEnabledValue)).isChecked();
         boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
         if (startAlertEnabled && start.getRowid() == 0L) {
@@ -118,9 +130,9 @@ public class CourseModificationActivity extends BaseActivity {
             start.setType(Alert.ALERT_TYPE.START);
             start.setDate(course.getStartDate());
             start.setText(course.getTitle() + " starts today!");
-            alertRepository.save(start);
+            alertService.save(start);
         } else if (!startAlertEnabled && start.getRowid() != 0L) {
-            alertRepository.delete(start);
+            alertService.delete(start);
         }
 
         if (endAlertEnabled && end.getRowid() == 0L) {
@@ -129,15 +141,9 @@ public class CourseModificationActivity extends BaseActivity {
             end.setType(Alert.ALERT_TYPE.END);
             end.setDate(course.getAnticipatedEndDate());
             end.setText(course.getTitle() + " ends today!");
-            alertRepository.save(end);
+            alertService.save(end);
         } else if (!endAlertEnabled && end.getRowid() != 0L) {
-            alertRepository.delete(end);
-        }
-
-        if (isInsert) {
-            navigateToTarget(CoursesActivity.class, null, course.getTermId());
-        } else {
-            navigateToTarget(CourseDetailsActivity.class, course.getRowid());
+            alertService.delete(end);
         }
     }
 }

@@ -27,4 +27,6 @@
     <string name="mentorFirstNameLabel">First Name</string>
     <string name="mentorLastNameLabel">Last Name</string>
     <string name="mentorPhoneLabel">Phone Number</string>
+    <string name="alerts_channel_name">Alerts</string>
+    <string name="alerts_channel_description">For reminders and alerts.</string>
 </resources>

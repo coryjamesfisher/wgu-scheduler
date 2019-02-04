@@ -46,6 +46,8 @@
         <activity android:name=".CourseModificationActivity" />
         <activity android:name=".AssessmentModificationActivity" />
         <activity android:name=".MentorModificationActivity" />
+
+        <receiver android:name=".AlarmReceiver" />
     </application>
 
 </manifest>

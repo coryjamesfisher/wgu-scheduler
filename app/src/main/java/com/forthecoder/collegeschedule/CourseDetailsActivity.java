@@ -32,10 +32,14 @@ public class CourseDetailsActivity extends BaseActivity {
 
         final CourseRepository cr = new CourseRepository(getDatabase());
         try {
+            Log.e("DETAILS RECEIVED", "ROW ID: " + getIntent().getLongExtra("rowid", 0L));
             course = cr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
         }
         termId = getIntent().getLongExtra("parentid", 0L);
+        Log.e("DETAILS RECEIVED", "PARENT ID: " + getIntent().getLongExtra("parentid", 0L));
+        Log.e("LOADED", "ROW ID:" + course.getRowid());
+        Log.e("LOADED", "TITLE:" + course.getTitle());
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         ((TextView)findViewById(R.id.courseTitleValue)).setText(course.getTitle());

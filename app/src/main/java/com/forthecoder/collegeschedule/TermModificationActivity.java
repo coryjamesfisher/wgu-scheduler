@@ -1,8 +1,17 @@
 package com.forthecoder.collegeschedule;
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
@@ -36,7 +45,6 @@ public class TermModificationActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         Long rowId = getIntent().getLongExtra("rowid", 0L);
 
@@ -87,17 +95,29 @@ public class TermModificationActivity extends BaseActivity {
         TermRepository termRepository = new TermRepository(getDatabase());
         termRepository.save(term);
 
-        AlertRepository alertRepository = new AlertRepository(getDatabase());
+        handleAlerts();
+
+        if (isInsert) {
+            navigateToTarget(TermsActivity.class);
+        } else {
+            navigateToTarget(TermDetailsActivity.class, term.getRowid());
+        }
+    }
+
+    private void handleAlerts() throws IllegalAccessException, ApplicationException, InvocationTargetException {
         boolean startAlertEnabled = ((Switch)findViewById(R.id.startAlertEnabledValue)).isChecked();
         boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
+
+        AlertService alertService = new AlertService(this);
         if (startAlertEnabled && start.getRowid() == 0L) {
             start.setTermId(term.getRowid());
             start.setType(Alert.ALERT_TYPE.START);
             start.setDate(term.getStartDate());
             start.setText(term.getTitle() + " starts today!");
-            alertRepository.save(start);
+            alertService.save(start);
+
         } else if (!startAlertEnabled && start.getRowid() != 0L) {
-            alertRepository.delete(start);
+            alertService.delete(start);
         }
 
         if (endAlertEnabled && end.getRowid() == 0L) {
@@ -105,15 +125,9 @@ public class TermModificationActivity extends BaseActivity {
             end.setType(Alert.ALERT_TYPE.END);
             end.setDate(term.getEndDate());
             end.setText(term.getTitle() + " ends today!");
-            alertRepository.save(end);
+            alertService.save(end);
         } else if (!endAlertEnabled && end.getRowid() != 0L) {
-            alertRepository.delete(end);
-        }
-
-        if (isInsert) {
-            navigateToTarget(TermsActivity.class);
-        } else {
-            navigateToTarget(TermDetailsActivity.class, term.getRowid());
+            alertService.delete(end);
         }
     }
 }
