@@ -102,10 +102,7 @@ public class AssessmentModificationActivity extends BaseActivity {
 
         boolean isInsert = assessment.getRowid() == 0L;
 
-        AssessmentRepository assessmentRepository = new AssessmentRepository(getDatabase());
-        assessmentRepository.save(assessment);
-
-        AlertRepository alertRepository = new AlertRepository(getDatabase());
+        AlertService alertService = new AlertService(this);
         boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
         if (endAlertEnabled && end.getRowid() == 0L) {
             end.setCourseId(assessment.getCourseId());
@@ -113,9 +110,9 @@ public class AssessmentModificationActivity extends BaseActivity {
             end.setType(Alert.ALERT_TYPE.END);
             end.setDate(assessment.getGoalDate());
             end.setText(assessment.getTitle() + " starts today!");
-            alertRepository.save(end);
+            alertService.save(end);
         } else if (!endAlertEnabled && end.getRowid() != 0L) {
-            alertRepository.delete(end);
+            alertService.delete(end);
         }
 
         if (isInsert) {
