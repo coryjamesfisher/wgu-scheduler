@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 import com.forthecoder.collegeschedule.entity.Alert;
 import com.forthecoder.collegeschedule.entity.AlertRepository;
@@ -42,10 +43,12 @@ public class AlertService {
     private PendingIntent getPendingIntent(Alert alert) {
         Intent intent = new Intent(context, AlarmReceiver.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.putExtra("alertId", alert.getRowid());
         intent.putExtra("termId", alert.getTermId());
         intent.putExtra("courseId", alert.getCourseId());
         intent.putExtra("assessmentId", alert.getAssessmentId());
         intent.putExtra("text", alert.getText());
-        return PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, 0);
+        Log.e("CREATING ALARM", "ID: " + alert.getRowid().intValue());
+        return PendingIntent.getBroadcast(context.getApplicationContext(), alert.getRowid().intValue(), intent, 0);
     }
 }
