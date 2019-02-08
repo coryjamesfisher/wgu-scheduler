@@ -13,6 +13,11 @@ import com.forthecoder.collegeschedule.exception.ApplicationException;
 
 import java.text.DateFormat;
 
+/**
+ * Requirement A4C: Term Details
+ * This activity shows the details of a particular term including
+ * all of the term information title, start date, and end date.
+ */
 public class TermDetailsActivity extends BaseActivity {
 
     private Term term;
@@ -53,6 +58,13 @@ public class TermDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 try {
+
+                    /*
+                     * Requirement A3: Validation Implementation
+                     * The following validation prevents a term from being deleted if it
+                     * has courses assigned to it.
+                     * @todo complete this
+                     */
                     tr.delete(term);
                     navigateToTarget(TermsActivity.class);
                 } catch (ApplicationException ignored) {

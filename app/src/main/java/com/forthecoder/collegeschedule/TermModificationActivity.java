@@ -1,18 +1,6 @@
 package com.forthecoder.collegeschedule;
 
-import android.app.AlarmManager;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.util.Log;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -26,9 +14,19 @@ import com.forthecoder.collegeschedule.exception.ApplicationException;
 import java.lang.reflect.InvocationTargetException;
 import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * Requirement A1: Functional Requirements for Terms
+ * This activity drives the ability to enter the information for a term.
+ * This includes title, start, and end date.
+ * It supports both creation and modification of existing
+ * terms.
+ *
+ * Requirement A2: Term Addition Feature
+ * Since this is a standalone activity, it can be called an infinite number
+ * of times from the list action thus, unlimited terms are allowed.
+ */
 public class TermModificationActivity extends BaseActivity {
 
     private Term term;
@@ -38,8 +36,6 @@ public class TermModificationActivity extends BaseActivity {
     public TermModificationActivity() {
         super();
         contentLayout = R.layout.activity_term_modification;
-
-        Log.e("ERROR", "TERM MODIFICATION ACTIVITY STARTED");
     }
 
     @Override
@@ -56,6 +52,7 @@ public class TermModificationActivity extends BaseActivity {
             start = new Alert();
             end = new Alert();
         } else {
+
             TermRepository tr = new TermRepository(getDatabase());
             try {
                 term = tr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
@@ -83,6 +80,11 @@ public class TermModificationActivity extends BaseActivity {
         ((Switch)findViewById(R.id.endAlertEnabledValue)).setChecked(end.getRowid() != 0L);
     }
 
+    /**
+     * This method will save the term and navigate to one of two places.
+     * For inserts, navigates to the terms list.
+     * For updates, navigates to the term details.
+     */
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
@@ -104,6 +106,9 @@ public class TermModificationActivity extends BaseActivity {
         }
     }
 
+    /**
+     * This method will handle creation and deletion of the alerts via the alert service.
+     */
     private void handleAlerts() throws IllegalAccessException, ApplicationException, InvocationTargetException {
         boolean startAlertEnabled = ((Switch)findViewById(R.id.startAlertEnabledValue)).isChecked();
         boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();

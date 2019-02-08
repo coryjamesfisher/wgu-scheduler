@@ -1,8 +1,6 @@
 package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -22,6 +20,19 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Calendar;
 
+/**
+ * Requirement A6A: Assessment Addition
+ * Since this is a standalone activity, it can be called an infinite number
+ * of times from the list action thus 1-n assessments can be added for a course.
+ *
+ * Requirement A7A: Assessments For Each Course
+ * This activity allows the entering of all fields for the assessment
+ * including title, type, goal date, and status.
+ *
+ * Requirement A7B: Assessment Information
+ * This activity allows the user to create or modify any assessment.
+ * The delete is handled in the assessment details activity as an action handler.
+ */
 public class AssessmentModificationActivity extends BaseActivity {
 
     private static final String[] STATUSES = {"NOT TAKEN", "PASSED", "FAILED"};
@@ -32,7 +43,6 @@ public class AssessmentModificationActivity extends BaseActivity {
     public AssessmentModificationActivity() {
         super();
         contentLayout = R.layout.activity_assessment_modification;
-        Log.e("ERROR", "ASSESSMENT MODIFICATION ACTIVITY STARTED");
     }
 
     @Override
@@ -91,6 +101,11 @@ public class AssessmentModificationActivity extends BaseActivity {
         ((Switch)findViewById(R.id.endAlertEnabledValue)).setChecked(end.getRowid() != 0L);
     }
 
+    /**
+     * This method will save the assessment and navigate to one of two places.
+     * For inserts, navigates to the assessment list for the course assigned to this assessment.
+     * For updates, navigates to the assessment details.
+     */
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
@@ -102,6 +117,20 @@ public class AssessmentModificationActivity extends BaseActivity {
 
         boolean isInsert = assessment.getRowid() == 0L;
 
+        handleAlerts();
+
+        if (isInsert) {
+            navigateToTarget(AssessmentsActivity.class, null, assessment.getCourseId());
+        } else {
+            navigateToTarget(AssessmentDetailsActivity.class, assessment.getRowid());
+        }
+    }
+
+    /**
+     * Requirement A7C: Alerts for Goal Dates
+     * This method will handle creation and deletion of the alerts for assessment goal dates via the alert service.
+     */
+    private void handleAlerts() throws IllegalAccessException, ApplicationException, InvocationTargetException {
         AlertService alertService = new AlertService(this);
         boolean endAlertEnabled = ((Switch)findViewById(R.id.endAlertEnabledValue)).isChecked();
         if (endAlertEnabled && end.getRowid() == 0L) {
@@ -113,12 +142,6 @@ public class AssessmentModificationActivity extends BaseActivity {
             alertService.save(end);
         } else if (!endAlertEnabled && end.getRowid() != 0L) {
             alertService.delete(end);
-        }
-
-        if (isInsert) {
-            navigateToTarget(AssessmentsActivity.class, null, assessment.getCourseId());
-        } else {
-            navigateToTarget(AssessmentDetailsActivity.class, assessment.getRowid());
         }
     }
 }

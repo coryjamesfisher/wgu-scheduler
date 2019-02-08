@@ -2,6 +2,12 @@ package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
 
+/**
+ * Requirement C: Student Scheduler and Progress Tracking Application
+ * This activity shows progress meters for the term and the degree program overall.
+ * Scheduling is done via the creation of terms, courses, and assessments which
+ * each have dates associated.
+ */
 public class MainActivity extends BaseActivity {
 
     public MainActivity() {

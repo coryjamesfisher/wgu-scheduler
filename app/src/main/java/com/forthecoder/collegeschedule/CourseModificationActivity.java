@@ -23,6 +23,17 @@ import java.text.ParseException;
 import java.util.Arrays;
 import java.util.Calendar;
 
+/**
+ * Requirement A4A: Course Addition
+ * Since this is a standalone activity, it can be called an infinite number
+ * of times from the list action thus, unlimited courses are allowed for
+ * each term.
+ *
+ * Requirement A5: Course Details
+ * This activity drives the ability to enter the information for a course.
+ * This includes title, start date, anticipated end date, status, and notes.
+ * It supports both creation and modification of existing courses.
+ */
 public class CourseModificationActivity extends BaseActivity {
 
     private Course course;
@@ -36,7 +47,6 @@ public class CourseModificationActivity extends BaseActivity {
     public CourseModificationActivity() {
         super();
         contentLayout = R.layout.activity_course_modification;
-        Log.e("ERROR", "COURSE MODIFICATION ACTIVITY STARTED");
     }
 
     @Override
@@ -94,6 +104,11 @@ public class CourseModificationActivity extends BaseActivity {
         ((Switch)findViewById(R.id.endAlertEnabledValue)).setChecked(end.getRowid() != 0L);
     }
 
+    /**
+     * This method will save the course and navigate to one of two places.
+     * For inserts, navigates to the course list for the term assigned to this course.
+     * For updates, navigates to the course details.
+     */
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
@@ -102,6 +117,12 @@ public class CourseModificationActivity extends BaseActivity {
         course.setStartDate(dateFormat.parse(((TextView)findViewById(R.id.courseStartValue)).getText().toString()));
         course.setAnticipatedEndDate(dateFormat.parse(((TextView)findViewById(R.id.courseEndValue)).getText().toString()));
         course.setStatus(((Spinner)findViewById(R.id.courseStatusValue)).getSelectedItem().toString());
+
+        /*
+         * Requirement A6B: Optional Notes
+         * The application allows a user to add optional notes for each course.
+         * @todo finish implementing.
+         */
         course.setNotes("");
 
         boolean isInsert = course.getRowid() == 0L;
@@ -118,6 +139,10 @@ public class CourseModificationActivity extends BaseActivity {
         }
     }
 
+    /**
+     * Requirement A6F: Alerts for Courses
+     * This method will handle creation and deletion of the alerts for a course via the alert service.
+     */
     private void handleAlerts() throws InvocationTargetException, IllegalAccessException, ApplicationException {
 
         AlertService alertService = new AlertService(this);

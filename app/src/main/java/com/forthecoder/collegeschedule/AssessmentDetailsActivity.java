@@ -2,7 +2,6 @@ package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -21,7 +20,6 @@ public class AssessmentDetailsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_assessment_details;
         actionLayout = R.layout.activity_assessment_details_actions;
-        Log.e("ERROR", "ASSESSMENT DETAILS ACTIVITY STARTED");
     }
 
     @Override

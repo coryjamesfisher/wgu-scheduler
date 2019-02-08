@@ -2,7 +2,6 @@ package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
@@ -13,6 +12,11 @@ import com.forthecoder.collegeschedule.exception.ApplicationException;
 
 import java.text.DateFormat;
 
+/**
+ * Requirement A6E: Detailed View
+ * This activity shows the details of a particular course including
+ * all of the course information title, start date, end date, and status.
+ */
 public class CourseDetailsActivity extends BaseActivity {
 
     private Course course;
@@ -32,20 +36,23 @@ public class CourseDetailsActivity extends BaseActivity {
 
         final CourseRepository cr = new CourseRepository(getDatabase());
         try {
-            Log.e("DETAILS RECEIVED", "ROW ID: " + getIntent().getLongExtra("rowid", 0L));
             course = cr.findOneByRowid(getIntent().getLongExtra("rowid", 0L));
         } catch (ApplicationException e) {
         }
         termId = getIntent().getLongExtra("parentid", 0L);
-        Log.e("DETAILS RECEIVED", "PARENT ID: " + getIntent().getLongExtra("parentid", 0L));
-        Log.e("LOADED", "ROW ID:" + course.getRowid());
-        Log.e("LOADED", "TITLE:" + course.getTitle());
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
         ((TextView)findViewById(R.id.courseTitleValue)).setText(course.getTitle());
         ((TextView)findViewById(R.id.courseStartValue)).setText(dateFormat.format(course.getStartDate()));
         ((TextView)findViewById(R.id.courseEndValue)).setText(dateFormat.format(course.getAnticipatedEndDate()));
         ((TextView)findViewById(R.id.courseStatusValue)).setText(course.getStatus());
+
+        /*
+         * Requirement A6D: Optional Notes
+         * This activity shows the notes for the course inline with the rest of the details.
+         * @todo make this work
+         */
+        //((TextView)findViewById(R.id.courseNotes)).setText(course.getNotes());
 
         /*
          * @todo add course notes list items
@@ -64,6 +71,11 @@ public class CourseDetailsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 try {
+                    /*
+                     * Requirement A6C: Course Information
+                     * This handler will delete all information for a course.
+                     * @todo handle deleting the course's assessments.
+                     */
                     cr.delete(course);
                     navigateToTarget(CoursesActivity.class, null, termId);
                 } catch (ApplicationException ignored) {

@@ -15,6 +15,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Requirement A4B: List of Courses
+ * This activity will list the courses for a term.
+ */
 public class CoursesActivity extends BaseActivity {
 
     private Long termId;
@@ -23,7 +27,6 @@ public class CoursesActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_courses;
         actionLayout = R.layout.activity_courses_actions;
-        Log.e("ERROR", "COURSES ACTIVITY STARTED");
     }
 
     @Override

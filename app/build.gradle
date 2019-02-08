@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 
+// Requirement A: Application Version
+// The minSDKVersion (19) correlates to android v4.4.x
+// The targetSdkVersion (28) correlates to the latest version android 9.0
 android {
     compileSdkVersion 28
     defaultConfig {
