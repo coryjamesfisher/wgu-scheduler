@@ -106,14 +106,34 @@ public class AssessmentModificationActivity extends BaseActivity {
      * For inserts, navigates to the assessment list for the course assigned to this assessment.
      * For updates, navigates to the assessment details.
      */
-    public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
+    public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
-        assessment.setTitle(((TextView)findViewById(R.id.assessmentTitleValue)).getText().toString());
-        assessment.setGoalDate(dateFormat.parse(((TextView)findViewById(R.id.assessmentGoalDateValue)).getText().toString()));
+
+        TextView titleInput = findViewById(R.id.assessmentTitleValue);
+        TextView goalDateInput = findViewById(R.id.assessmentGoalDateValue);
+
+        assessment.setTitle(titleInput.getText().toString());
+
+        boolean valid = true;
+        try {
+            assessment.setGoalDate(dateFormat.parse(goalDateInput.getText().toString()));
+        } catch (ParseException e) {
+            valid = false;
+            goalDateInput.setError("Invalid date format!");
+        }
         assessment.setType(((Spinner)findViewById(R.id.assessmentTypeValue)).getSelectedItem().toString());
         assessment.setStatus(((Spinner)findViewById(R.id.assessmentStatusValue)).getSelectedItem().toString());
+
+        if (assessment.getTitle().isEmpty()) {
+            valid = false;
+            titleInput.setError("Required field!");
+        }
+
+        if (!valid) {
+            return;
+        }
 
         boolean isInsert = assessment.getRowid() == 0L;
 

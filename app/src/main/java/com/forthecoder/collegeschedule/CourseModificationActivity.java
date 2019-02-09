@@ -109,14 +109,36 @@ public class CourseModificationActivity extends BaseActivity {
      * For inserts, navigates to the course list for the term assigned to this course.
      * For updates, navigates to the course details.
      */
-    public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
+    public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
-        course.setTitle(((TextView)findViewById(R.id.courseTitleValue)).getText().toString());
-        course.setStartDate(dateFormat.parse(((TextView)findViewById(R.id.courseStartValue)).getText().toString()));
-        course.setAnticipatedEndDate(dateFormat.parse(((TextView)findViewById(R.id.courseEndValue)).getText().toString()));
+        TextView titleInput = findViewById(R.id.courseTitleValue);
+        TextView startDateInput = findViewById(R.id.courseStartValue);
+        TextView endDateInput = findViewById(R.id.courseEndValue);
+
+        course.setTitle(titleInput.getText().toString());
         course.setStatus(((Spinner)findViewById(R.id.courseStatusValue)).getSelectedItem().toString());
+
+        boolean valid = true;
+        try {
+            course.setStartDate(dateFormat.parse(startDateInput.getText().toString()));
+        } catch (ParseException e) {
+            valid = false;
+            startDateInput.setError("Invalid date format.");
+        }
+
+        try {
+            course.setAnticipatedEndDate(dateFormat.parse(endDateInput.getText().toString()));
+        } catch (ParseException e) {
+            valid = false;
+            endDateInput.setError("Invalid date format.");
+        }
+
+        if (course.getTitle().isEmpty()) {
+            valid = false;
+            titleInput.setError("Required field!");
+        }
 
         /*
          * Requirement A6B: Optional Notes
@@ -124,6 +146,10 @@ public class CourseModificationActivity extends BaseActivity {
          * @todo finish implementing.
          */
         course.setNotes("");
+
+        if (!valid) {
+            return;
+        }
 
         boolean isInsert = course.getRowid() == 0L;
 

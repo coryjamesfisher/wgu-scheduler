@@ -1,6 +1,8 @@
 package com.forthecoder.collegeschedule;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -85,13 +87,41 @@ public class TermModificationActivity extends BaseActivity {
      * For inserts, navigates to the terms list.
      * For updates, navigates to the term details.
      */
-    public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException, ParseException {
+    public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException {
 
         DateFormat dateFormat = android.text.format.DateFormat.getDateFormat(getApplicationContext());
 
-        term.setTitle(((TextView)findViewById(R.id.termTitleValue)).getText().toString());
-        term.setStartDate(dateFormat.parse(((TextView)findViewById(R.id.termStartValue)).getText().toString()));
-        term.setEndDate(dateFormat.parse(((TextView)findViewById(R.id.termEndValue)).getText().toString()));
+        TextView titleInput = findViewById(R.id.termTitleValue);
+        TextView termStartInput = findViewById(R.id.termStartValue);
+        TextView termEndInput = findViewById(R.id.termEndValue);
+
+        term.setTitle(titleInput.getText().toString());
+
+
+        boolean valid = true;
+        try {
+            term.setStartDate(dateFormat.parse(termStartInput.getText().toString()));
+        } catch (ParseException e) {
+            valid = false;
+            termStartInput.setError("Invalid date format.");
+        }
+
+        try {
+            term.setEndDate(dateFormat.parse(termEndInput.getText().toString()));
+        } catch (ParseException e) {
+            valid = false;
+            termEndInput.setError("Invalid date format.");
+        }
+
+        if (term.getTitle().isEmpty()) {
+            valid = false;
+            titleInput.setError("Required field!");
+        }
+
+        // If the details aren't valid. Do not save/submit.
+        if (!valid) {
+            return;
+        }
 
         boolean isInsert = term.getRowid() == 0L;
         TermRepository termRepository = new TermRepository(getDatabase());

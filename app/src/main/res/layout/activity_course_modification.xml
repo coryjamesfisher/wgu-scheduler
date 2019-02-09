@@ -38,7 +38,7 @@
 
         <EditText
             android:id="@+id/courseTitleValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
@@ -60,9 +60,10 @@
 
         <EditText
             android:id="@+id/courseStartValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginEnd="200dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:inputType="date"
@@ -83,9 +84,10 @@
 
         <EditText
             android:id="@+id/courseEndValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
+            android:layout_marginEnd="200dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:inputType="date"
@@ -95,23 +97,27 @@
 
         <Switch
             android:id="@+id/startAlertEnabledValue"
-            android:layout_width="82dp"
+            android:layout_width="87dp"
             android:layout_height="22dp"
             android:layout_marginStart="52dp"
             android:layout_marginTop="12dp"
-            android:switchPadding="8dp"
+            android:layout_marginEnd="8dp"
+            android:switchPadding="1dp"
             android:text="Alert"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/courseStartValue"
             app:layout_constraintTop_toTopOf="@+id/courseStartValue" />
 
         <Switch
             android:id="@+id/endAlertEnabledValue"
-            android:layout_width="82dp"
+            android:layout_width="87dp"
             android:layout_height="28dp"
             android:layout_marginStart="52dp"
             android:layout_marginTop="90dp"
-            android:switchPadding="8dp"
+            android:layout_marginEnd="8dp"
+            android:switchPadding="1dp"
             android:text="Alert"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/courseEndValue"
             app:layout_constraintTop_toBottomOf="@+id/startAlertEnabledValue" />
 
@@ -128,7 +134,7 @@
 
         <Spinner
             android:id="@+id/courseStatusValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
@@ -151,7 +157,7 @@
 
         <ListView
             android:id="@+id/courseNotesList"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"

@@ -38,18 +38,20 @@
 
         <EditText
             android:id="@+id/termTitleValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="8dp"
             android:text="FIRST TERM"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/termTitleLabel" />
 
         <TextView
             android:id="@+id/termStartLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
@@ -60,10 +62,11 @@
 
         <EditText
             android:id="@+id/termStartValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="200dp"
             android:inputType="date"
             android:text="01/01/2018"
             android:textSize="18sp"
@@ -83,10 +86,11 @@
 
         <EditText
             android:id="@+id/termEndValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="200dp"
             android:inputType="date"
             android:text="01/01/2019"
             android:textSize="18sp"
@@ -97,12 +101,11 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="156dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/termEndValue"
             android:onClick="save"/>

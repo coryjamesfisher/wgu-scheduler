@@ -57,10 +57,48 @@ public class MentorModificationActivity extends BaseActivity {
 
     public void save(View view) throws IllegalAccessException, ApplicationException, InvocationTargetException {
 
-        mentor.setFirstName(((TextView)findViewById(R.id.mentorFirstNameValue)).getText().toString());
-        mentor.setLastName(((TextView)findViewById(R.id.mentorLastNameValue)).getText().toString());
-        mentor.setEmail(((TextView)findViewById(R.id.mentorEmailValue)).getText().toString());
-        mentor.setPhoneNumber(((TextView)findViewById(R.id.mentorPhoneValue)).getText().toString());
+
+        TextView firstNameInput = findViewById(R.id.mentorFirstNameValue);
+        TextView lastNameInput = findViewById(R.id.mentorLastNameValue);
+        TextView emailInput = findViewById(R.id.mentorEmailValue);
+        TextView phoneInput = findViewById(R.id.mentorPhoneValue);
+
+        mentor.setFirstName(firstNameInput.getText().toString());
+        mentor.setLastName(lastNameInput.getText().toString());
+        mentor.setEmail(emailInput.getText().toString());
+        mentor.setPhoneNumber(phoneInput.getText().toString());
+
+        boolean valid = true;
+
+        if (mentor.getFirstName().isEmpty()) {
+            valid = false;
+            firstNameInput.setError("Required field!");
+        }
+
+        if (mentor.getLastName().isEmpty()) {
+            valid = false;
+            lastNameInput.setError("Required field!");
+        }
+
+        if (mentor.getEmail().isEmpty()) {
+            valid = false;
+            emailInput.setError("Required field!");
+        } else if (!mentor.getEmail().matches("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
+            valid = false;
+            emailInput.setError("Invalid email format!");
+        }
+
+        if (mentor.getPhoneNumber().isEmpty()) {
+            valid = false;
+            phoneInput.setError("Required field!");
+        } else if (!mentor.getPhoneNumber().matches("\\d{10}|(?:\\d{3}-){2}\\d{4}|\\(\\d{3}\\)\\d{3}-?\\d{4}")) {
+            valid = false;
+            phoneInput.setError("Invalid phone format!");
+        }
+
+        if (!valid) {
+            return;
+        }
 
         boolean isInsert = mentor.getRowid() == 0L;
         boolean isAddingForCourse = courseMentor.getCourseId() != 0L;

@@ -38,7 +38,7 @@
 
         <EditText
             android:id="@+id/mentorFirstNameValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
@@ -60,7 +60,7 @@
 
         <EditText
             android:id="@+id/mentorLastNameValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
@@ -82,12 +82,13 @@
 
         <EditText
             android:id="@+id/mentorPhoneValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:text="555-555-1234"
+            android:inputType="phone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mentorPhoneLabel" />
 
@@ -104,12 +105,13 @@
 
         <EditText
             android:id="@+id/mentorEmailValue"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
             android:textSize="18sp"
             android:text="bryan.chun@wgu.edu"
+            android:inputType="textEmailAddress"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mentorEmailLabel" />
 
