@@ -1,6 +1,7 @@
 package com.forthecoder.collegeschedule;
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.widget.ProgressBar;
 
@@ -58,7 +59,7 @@ public class MainActivity extends BaseActivity {
             for (Course course : courses) {
                 count++;
 
-                if (course.getStatus().equals("COMPLETE")) {
+                if (course.getStatus().equals("COMPLETED")) {
                     countComplete++;
                 }
             }

@@ -1,5 +1,6 @@
 package com.forthecoder.collegeschedule;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -16,6 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+
+import com.forthecoder.collegeschedule.entity.Term;
+import com.forthecoder.collegeschedule.entity.TermRepository;
+
+import java.util.Calendar;
 
 abstract class BaseActivity extends AppCompatActivity {
 
@@ -139,7 +145,20 @@ abstract class BaseActivity extends AppCompatActivity {
                                 break;
                             case R.id.nav_current_term:
                                 targetClass = TermDetailsActivity.class;
-                                break;
+                                TermRepository termRepository = new TermRepository(getDatabase());
+                                try {
+                                    Term term = termRepository.findFirstIncludingDate(Calendar.getInstance().getTime());
+                                    navigateToTarget(targetClass, term.getRowid());
+                                    return true;
+                                } catch (Exception e) {
+                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext())
+                                            .setTitle("Error")
+                                            .setMessage("Failed to locate current term.")
+                                            .setPositiveButton("OK", null);
+                                    mainLayout.closeDrawers();
+                                    alertDialog.show();
+                                    return false;
+                                }
                             case R.id.nav_terms:
                                 targetClass = TermsActivity.class;
                                 break;

@@ -78,9 +78,9 @@ public class DB extends SQLiteOpenHelper {
             mentorRepository.save(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
 
 
-            courseRepository.save(new Course(1L,"C100", now, now, "COMPLETE", ""));
+            courseRepository.save(new Course(1L,"C100", now, now, "COMPLETED", ""));
             courseRepository.save(new Course(2L,"C196", now, now, "IN PROGRESS", ""));
-            courseRepository.save(new Course(2L,"C198", now, now, "COMPLETE", ""));
+            courseRepository.save(new Course(2L,"C198", now, now, "COMPLETED", ""));
             courseRepository.save(new Course(3L,"C196", now, now, "IN PROGRESS", ""));
             courseRepository.save(new Course(3L,"C196", now, now, "IN PROGRESS", ""));
 
@@ -91,7 +91,6 @@ public class DB extends SQLiteOpenHelper {
             assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
             assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));
 
-//            alertRepository.save(new Alert(1L, 1L, 1L, now, Alert.ALERT_TYPE.START, "BOGUS ALERT"));
         } catch (Exception e) {
             // ignore
             Log.e("ERROR", e.toString());
