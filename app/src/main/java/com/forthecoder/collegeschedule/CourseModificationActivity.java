@@ -88,6 +88,7 @@ public class CourseModificationActivity extends BaseActivity {
         ((TextView)findViewById(R.id.courseTitleValue)).setText(course.getTitle());
         ((TextView)findViewById(R.id.courseStartValue)).setText(dateFormat.format(course.getStartDate()));
         ((TextView)findViewById(R.id.courseEndValue)).setText(dateFormat.format(course.getAnticipatedEndDate()));
+        ((TextView)findViewById(R.id.courseNotesValue)).setText(course.getNotes());
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, STATUSES);
@@ -117,6 +118,13 @@ public class CourseModificationActivity extends BaseActivity {
         TextView startDateInput = findViewById(R.id.courseStartValue);
         TextView endDateInput = findViewById(R.id.courseEndValue);
 
+
+        /*
+         * Requirement A6B: Optional Notes
+         * The application allows a user to add optional notes for each course.
+         * Note these will not have validation because they are not required.
+         */
+        course.setNotes(((TextView)findViewById(R.id.courseNotesValue)).getText().toString());
         course.setTitle(titleInput.getText().toString());
         course.setStatus(((Spinner)findViewById(R.id.courseStatusValue)).getSelectedItem().toString());
 
@@ -139,13 +147,6 @@ public class CourseModificationActivity extends BaseActivity {
             valid = false;
             titleInput.setError("Required field!");
         }
-
-        /*
-         * Requirement A6B: Optional Notes
-         * The application allows a user to add optional notes for each course.
-         * @todo finish implementing.
-         */
-        course.setNotes("");
 
         if (!valid) {
             return;

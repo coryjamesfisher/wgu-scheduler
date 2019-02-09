@@ -145,7 +145,7 @@
 
         <TextView
             android:id="@+id/courseNotesLabel"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="27dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
@@ -155,15 +155,15 @@
             app:layout_constraintTop_toBottomOf="@+id/courseStatusValue" />
 
 
-        <ListView
-            android:id="@+id/courseNotesList"
+        <EditText
+            android:id="@+id/courseNotesValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="10dp"
+            android:inputType="textMultiLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courseNotesLabel">
-        </ListView>
+            app:layout_constraintTop_toBottomOf="@+id/courseNotesLabel" />
 
         <Button
             android:id="@+id/button2"
@@ -175,7 +175,7 @@
             android:text="Save"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courseNotesList"
+            app:layout_constraintTop_toBottomOf="@+id/courseNotesValue"
             android:onClick="save"/>
 
 

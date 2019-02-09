@@ -123,6 +123,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/courseStatusLabel" />
 
+        <TextView
+            android:id="@+id/courseNotesLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="40dp"
+            android:textSize="18sp"
+            android:text="NOTES"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseStatusValue" />
+
+
+        <TextView
+            android:id="@+id/courseNotesValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/courseNotesLabel">
+        </TextView>
+
+
+
         <Button
             android:id="@+id/listAssessmentsButton"
             android:layout_width="wrap_content"
@@ -133,7 +157,7 @@
             android:onClick="navigateToAssessmentsList"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/courseStatusValue"/>
+            app:layout_constraintTop_toBottomOf="@id/courseNotesValue"/>
 
         <Button
             android:id="@+id/listMentorsButton"
@@ -146,28 +170,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/listAssessmentsButton"/>
-
-        <TextView
-            android:id="@+id/courseNotesLabel"
-            android:layout_width="wrap_content"
-            android:layout_height="27dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="40dp"
-            android:textSize="18sp"
-            android:text="NOTES"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listMentorsButton" />
-
-
-        <ListView
-            android:id="@+id/courseNotesList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/courseNotesLabel">
-        </ListView>
 
 
     </android.support.constraint.ConstraintLayout>

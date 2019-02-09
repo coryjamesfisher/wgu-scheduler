@@ -47,6 +47,7 @@ public class CourseDetailsActivity extends BaseActivity {
         ((TextView)findViewById(R.id.courseStartValue)).setText(dateFormat.format(course.getStartDate()));
         ((TextView)findViewById(R.id.courseEndValue)).setText(dateFormat.format(course.getAnticipatedEndDate()));
         ((TextView)findViewById(R.id.courseStatusValue)).setText(course.getStatus());
+        ((TextView)findViewById(R.id.courseNotesValue)).setText(course.getNotes());
 
         /*
          * Requirement A6D: Optional Notes
