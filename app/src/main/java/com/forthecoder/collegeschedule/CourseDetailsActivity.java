@@ -1,10 +1,12 @@
 package com.forthecoder.collegeschedule;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
 import com.forthecoder.collegeschedule.entity.Course;
@@ -68,8 +70,27 @@ public class CourseDetailsActivity extends BaseActivity {
             }
         });
 
-        FloatingActionButton fab2 = findViewById(R.id.remove_button);
+        FloatingActionButton fab2 = findViewById(R.id.share_button);
         fab2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                StringBuilder message = new StringBuilder();
+                message.append("Course: ")
+                        .append(course.getTitle()).append("\n")
+                        .append("Notes:\n")
+                        .append(course.getNotes());
+
+                Intent shareIntent = new Intent();
+                shareIntent.setAction(Intent.ACTION_SEND);
+                shareIntent.putExtra(Intent.EXTRA_TEXT, message.toString());
+                shareIntent.setType("text/plain");
+                startActivity(shareIntent);
+            }
+        });
+
+        FloatingActionButton fab3 = findViewById(R.id.remove_button);
+        fab3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 try {
