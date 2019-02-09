@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content" android:layout_width="wrap_content"
-    tools:context=".CoursesActivity"
-    tools:showIn="@layout/activity_courses">
+    tools:context=".CoursesActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,7 +12,7 @@
 
         <TextView
             android:id="@+id/coursesTitle"
-            android:layout_width="164dp"
+            android:layout_width="95dp"
             android:layout_height="26dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="64dp"
@@ -24,6 +23,16 @@
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/upLevelButton"
+            android:layout_width="47dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="52dp"
+            android:drawableStart="@drawable/ic_up_arrow"
+            app:layout_constraintStart_toEndOf="@+id/coursesTitle"
             app:layout_constraintTop_toTopOf="parent" />
 
 

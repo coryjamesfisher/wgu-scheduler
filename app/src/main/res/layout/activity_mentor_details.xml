@@ -12,8 +12,8 @@
 
         <TextView
             android:id="@+id/mentorDetailsTitle"
-            android:layout_width="211dp"
-            android:layout_height="24dp"
+            android:layout_width="155dp"
+            android:layout_height="25dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="64dp"
             android:ems="10"
@@ -112,6 +112,16 @@
             android:text="bryan.chun@wgu.edu"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/mentorEmailLabel" />
+
+        <Button
+            android:id="@+id/upLevelButton"
+            android:layout_width="47dp"
+            android:layout_height="43dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="52dp"
+            android:drawableStart="@drawable/ic_up_arrow"
+            app:layout_constraintStart_toEndOf="@+id/mentorDetailsTitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

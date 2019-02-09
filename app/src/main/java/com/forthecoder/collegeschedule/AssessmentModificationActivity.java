@@ -117,6 +117,9 @@ public class AssessmentModificationActivity extends BaseActivity {
 
         boolean isInsert = assessment.getRowid() == 0L;
 
+        AssessmentRepository ar = new AssessmentRepository(getDatabase());
+        ar.save(assessment);
+
         handleAlerts();
 
         if (isInsert) {

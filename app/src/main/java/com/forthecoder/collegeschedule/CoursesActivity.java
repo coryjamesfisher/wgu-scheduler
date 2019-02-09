@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.forthecoder.collegeschedule.entity.Course;
@@ -52,7 +53,6 @@ public class CoursesActivity extends BaseActivity {
                             fieldMap,
                             R.layout.courses_list_item));
 
-
             coursesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -69,6 +69,14 @@ public class CoursesActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 navigateToTarget(view, null, termId);
+            }
+        });
+
+        Button upLevelButton = findViewById(R.id.upLevelButton);
+        upLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToTarget(TermDetailsActivity.class, termId);
             }
         });
     }

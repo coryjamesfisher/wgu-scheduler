@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.forthecoder.collegeschedule.entity.Assessment;
@@ -64,6 +65,14 @@ public class AssessmentsActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 navigateToTarget(view, null, courseId);
+            }
+        });
+
+        Button upLevelButton = findViewById(R.id.upLevelButton);
+        upLevelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navigateToTarget(CourseDetailsActivity.class, courseId);
             }
         });
     }

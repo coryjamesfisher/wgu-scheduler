@@ -94,7 +94,7 @@ public class MentorModificationActivity extends BaseActivity {
             navigateToTarget(MentorsActivity.class);
         }
         else {
-            navigateToTarget(MentorDetailsActivity.class, mentor.getRowid());
+            navigateToTarget(MentorDetailsActivity.class, mentor.getRowid(), courseMentor.getCourseId());
         }
     }
 }

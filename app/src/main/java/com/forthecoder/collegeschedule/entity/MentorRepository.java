@@ -4,6 +4,7 @@ import android.database.sqlite.SQLiteDatabase;
 
 import com.forthecoder.collegeschedule.exception.ApplicationException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MentorRepository extends BaseRepository<Mentor> {
@@ -12,6 +13,10 @@ public class MentorRepository extends BaseRepository<Mentor> {
     }
 
     public List<Mentor> findAllByIdList(List<Long> ids) throws ApplicationException {
+
+        if (ids == null || ids.size() == 0) {
+            return new ArrayList<>();
+        }
 
         String placeholders = "(";
         placeholders += String.format("%0" + ids.size() + "d", 0).replace("0", "?,");

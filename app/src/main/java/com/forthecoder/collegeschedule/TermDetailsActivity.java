@@ -5,6 +5,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.forthecoder.collegeschedule.entity.Term;
@@ -72,11 +73,11 @@ public class TermDetailsActivity extends BaseActivity {
             }
         });
 
-        FloatingActionButton fab3 = findViewById(R.id.list_alerts_button);
-        fab3.setOnClickListener(new View.OnClickListener() {
+        Button upLevelButton = findViewById(R.id.upLevelButton);
+        upLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                navigateToTarget(TermsActivity.class);
             }
         });
     }

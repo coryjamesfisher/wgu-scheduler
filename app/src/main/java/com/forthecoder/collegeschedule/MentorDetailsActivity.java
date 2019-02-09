@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.forthecoder.collegeschedule.entity.Mentor;
@@ -46,7 +47,7 @@ public class MentorDetailsActivity extends BaseActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navigateToTarget(view, mentor.getRowid());
+                navigateToTarget(view, mentor.getRowid(), courseId);
             }
         });
 
@@ -62,10 +63,11 @@ public class MentorDetailsActivity extends BaseActivity {
             }
         });
 
-        FloatingActionButton fab3 = findViewById(R.id.list_alerts_button);
-        fab3.setOnClickListener(new View.OnClickListener() {
+        Button upLevelButton = findViewById(R.id.upLevelButton);
+        upLevelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                navigateToTarget(MentorsActivity.class, null, courseId);
             }
         });
     }
