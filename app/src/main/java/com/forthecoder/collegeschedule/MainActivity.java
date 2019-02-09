@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        this.deleteDatabase(DB.DB_NAME);
+
         super.onCreate(savedInstanceState);
 
         ((ProgressBar)findViewById(R.id.degreeProgressIndicator))

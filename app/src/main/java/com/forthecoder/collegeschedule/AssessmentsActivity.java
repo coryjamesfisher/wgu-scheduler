@@ -24,7 +24,6 @@ public class AssessmentsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_assessments;
         actionLayout = R.layout.activity_assessments_actions;
-        Log.e("ERROR", "ASSESSMENTS ACTIVITY STARTED");
     }
 
     @Override

@@ -22,7 +22,6 @@ public class TermsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_terms;
         actionLayout = R.layout.activity_terms_actions;
-        Log.e("ERROR", "TERMS ACTIVITY STARTED");
     }
 
     @Override

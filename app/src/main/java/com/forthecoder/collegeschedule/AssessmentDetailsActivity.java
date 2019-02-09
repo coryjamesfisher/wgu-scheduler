@@ -40,10 +40,6 @@ public class AssessmentDetailsActivity extends BaseActivity {
         ((TextView)findViewById(R.id.assessmentStatusValue)).setText(assessment.getStatus());
         ((TextView)findViewById(R.id.assessmentGoalDateValue)).setText(dateFormat.format(assessment.getGoalDate()));
 
-        /*
-         * @todo add course notes list items
-         */
-
         FloatingActionButton fab = findViewById(R.id.edit_button);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

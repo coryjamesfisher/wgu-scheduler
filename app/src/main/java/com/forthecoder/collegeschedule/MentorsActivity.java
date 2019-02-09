@@ -27,7 +27,6 @@ public class MentorsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_mentors;
         actionLayout = R.layout.activity_mentors_actions;
-        Log.e("ERROR", "ASSESSMENTS ACTIVITY STARTED");
     }
 
     @Override

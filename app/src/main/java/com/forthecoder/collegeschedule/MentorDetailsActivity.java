@@ -20,7 +20,6 @@ public class MentorDetailsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_mentor_details;
         actionLayout = R.layout.activity_mentor_details_actions;
-        Log.e("ERROR", "MENTOR DETAILS ACTIVITY STARTED");
     }
 
     @Override
@@ -38,10 +37,6 @@ public class MentorDetailsActivity extends BaseActivity {
         ((TextView)findViewById(R.id.mentorLastNameValue)).setText(mentor.getLastName());
         ((TextView)findViewById(R.id.mentorPhoneValue)).setText(mentor.getPhoneNumber());
         ((TextView)findViewById(R.id.mentorEmailValue)).setText(mentor.getEmail());
-
-        /*
-         * @todo add course notes list items
-         */
 
         FloatingActionButton fab = findViewById(R.id.edit_button);
         fab.setOnClickListener(new View.OnClickListener() {

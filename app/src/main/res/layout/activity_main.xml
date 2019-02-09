@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content" android:layout_width="wrap_content"
-    tools:context=".MainActivity"
-    tools:showIn="@layout/activity_base">
+    tools:context=".MainActivity">
 
 <android.support.constraint.ConstraintLayout
     android:layout_width="match_parent"
@@ -66,39 +65,6 @@
         android:progressTint="@color/colorGreen"
         app:layout_constraintStart_toEndOf="@+id/termProgressIndicator"
         app:layout_constraintTop_toBottomOf="@+id/degreeProgressHeading" />
-
-    <android.support.constraint.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="end"
-        app:constraint_referenced_ids="degreeProgressHeading,upcomingEventsHeading" />
-
-    <ListView
-        android:layout_width="327dp"
-        android:layout_height="186dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toEndOf="@+id/barrier2"
-        app:layout_constraintTop_toBottomOf="@+id/upcomingEventsHeading" />
-
-    <TextView
-        android:id="@+id/upcomingEventsHeading"
-        android:layout_width="213dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="164dp"
-        android:ems="10"
-        android:text="@string/upcomingEventsHeading"
-        android:textAllCaps="false"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.533"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/termProgressIndicator" />
 
 </android.support.constraint.ConstraintLayout>
 </android.support.v4.widget.NestedScrollView>

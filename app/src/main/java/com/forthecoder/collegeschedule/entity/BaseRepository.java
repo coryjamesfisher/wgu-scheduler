@@ -143,7 +143,7 @@ public class BaseRepository<T> {
         insertSQL.append(");");
 
         try {
-            Log.e("ERROR", insertSQL.toString());
+            Log.i("SQL", insertSQL.toString());
             dbConnection.execSQL(insertSQL.toString(), values.toArray());
 
             // Set the last inserted rowid to the object.
@@ -188,7 +188,7 @@ public class BaseRepository<T> {
         updateSQL.append(" WHERE rowid = ?;");
 
         try {
-            Log.e("ERROR", updateSQL.toString());
+            Log.i("SQL", updateSQL.toString());
             dbConnection.execSQL(updateSQL.toString(), values.toArray());
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);
@@ -198,7 +198,7 @@ public class BaseRepository<T> {
     public void delete(T obj) throws ApplicationException {
         String deleteSQL = "DELETE FROM " + clazz.getSimpleName() + " WHERE rowid = ?;";
         try {
-            Log.e("ERROR", deleteSQL);
+            Log.i("SQL", deleteSQL);
             dbConnection.execSQL(deleteSQL, new Object[]{((BaseEntity)obj).getRowid()});
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);
@@ -225,7 +225,7 @@ public class BaseRepository<T> {
         schemaSQL.append(");");
 
         try {
-            Log.e("ERROR", schemaSQL.toString());
+            Log.i("SQL", schemaSQL.toString());
             dbConnection.execSQL(schemaSQL.toString());
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);
@@ -236,7 +236,7 @@ public class BaseRepository<T> {
 
         String schemaSQL = "DROP TABLE " + clazz.getSimpleName() + ";";
         try {
-            Log.e("ERROR", schemaSQL);
+            Log.i("SQL", schemaSQL);
             dbConnection.execSQL(schemaSQL);
         } catch (SQLException e) {
             throw new ApplicationException("A system error has occurred.", e);

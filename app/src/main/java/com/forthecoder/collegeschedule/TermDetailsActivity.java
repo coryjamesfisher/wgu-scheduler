@@ -31,8 +31,6 @@ public class TermDetailsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_term_details;
         actionLayout = R.layout.activity_term_details_actions;
-
-        Log.e("ERROR", "TERM DETAILS ACTIVITY STARTED");
     }
 
     @Override

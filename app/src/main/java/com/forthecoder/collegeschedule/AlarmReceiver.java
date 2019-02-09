@@ -17,7 +17,6 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
 
-        Log.e("RECEIVING NOTIFICATION", "RECEIVED");
         createNotificationChannel(context);
 
         Long notificationId = intent.getLongExtra("alertId", 0L);
@@ -45,9 +44,6 @@ public class AlarmReceiver extends BroadcastReceiver {
             return;
         }
 
-        Log.e("ID", "ROW ID:" + id);
-        Log.e("PARENT ID", "ROW ID:" + parentid);
-
         Intent target = new Intent(context, activity);
         target.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         target.putExtra("rowid", id);
@@ -67,7 +63,6 @@ public class AlarmReceiver extends BroadcastReceiver {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        Log.e("CREATING NOTIFICATION", "ID: " + notificationId.intValue());
         notificationManager.cancelAll();
         notificationManager.notify(notificationId.intValue(), mBuilder.build());
     }

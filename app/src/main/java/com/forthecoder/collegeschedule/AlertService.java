@@ -48,7 +48,6 @@ public class AlertService {
         intent.putExtra("courseId", alert.getCourseId());
         intent.putExtra("assessmentId", alert.getAssessmentId());
         intent.putExtra("text", alert.getText());
-        Log.e("CREATING ALARM", "ID: " + alert.getRowid().intValue());
         return PendingIntent.getBroadcast(context.getApplicationContext(), alert.getRowid().intValue(), intent, 0);
     }
 }

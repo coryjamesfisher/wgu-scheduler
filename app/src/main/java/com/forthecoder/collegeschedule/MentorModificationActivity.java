@@ -22,7 +22,6 @@ public class MentorModificationActivity extends BaseActivity {
     public MentorModificationActivity() {
         super();
         contentLayout = R.layout.activity_mentor_modification;
-        Log.e("ERROR", "MENTOR MODIFICATION ACTIVITY STARTED");
     }
 
     @Override

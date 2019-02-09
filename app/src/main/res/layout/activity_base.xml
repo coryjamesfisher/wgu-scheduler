@@ -8,6 +8,15 @@
     android:layout_width="match_parent"
     tools:context=".MainActivity">
 
+    <!--
+    Requirement B: Screen Layouts
+    Screen layouts are all found in this directory.
+    There are 3 types of layouts found here.
+    1. The activities' layouts: activity_*.xml
+    2. The activities' action layouts: activity_*_actions.xml
+    3. Base layout: activity_base.xml
+    -->
+
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

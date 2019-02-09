@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.ShareActionProvider;
 import android.widget.TextView;
 
+import com.forthecoder.collegeschedule.entity.AssessmentRepository;
 import com.forthecoder.collegeschedule.entity.Course;
 import com.forthecoder.collegeschedule.entity.CourseRepository;
 import com.forthecoder.collegeschedule.exception.ApplicationException;
@@ -29,7 +30,6 @@ public class CourseDetailsActivity extends BaseActivity {
         super();
         contentLayout = R.layout.activity_course_details;
         actionLayout = R.layout.activity_course_details_actions;
-        Log.e("ERROR", "COURSE DETAILS ACTIVITY STARTED");
     }
 
     @Override
@@ -49,18 +49,13 @@ public class CourseDetailsActivity extends BaseActivity {
         ((TextView)findViewById(R.id.courseStartValue)).setText(dateFormat.format(course.getStartDate()));
         ((TextView)findViewById(R.id.courseEndValue)).setText(dateFormat.format(course.getAnticipatedEndDate()));
         ((TextView)findViewById(R.id.courseStatusValue)).setText(course.getStatus());
-        ((TextView)findViewById(R.id.courseNotesValue)).setText(course.getNotes());
+
 
         /*
          * Requirement A6D: Optional Notes
          * This activity shows the notes for the course inline with the rest of the details.
-         * @todo make this work
          */
-        //((TextView)findViewById(R.id.courseNotes)).setText(course.getNotes());
-
-        /*
-         * @todo add course notes list items
-         */
+        ((TextView)findViewById(R.id.courseNotesValue)).setText(course.getNotes());
 
         FloatingActionButton fab = findViewById(R.id.edit_button);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -97,8 +92,9 @@ public class CourseDetailsActivity extends BaseActivity {
                     /*
                      * Requirement A6C: Course Information
                      * This handler will delete all information for a course.
-                     * @todo handle deleting the course's assessments.
                      */
+                    final AssessmentRepository ar = new AssessmentRepository(getDatabase());
+                    ar.deleteAllForCourse(course.getRowid());
                     cr.delete(course);
                     navigateToTarget(CoursesActivity.class, null, termId);
                 } catch (ApplicationException ignored) {
