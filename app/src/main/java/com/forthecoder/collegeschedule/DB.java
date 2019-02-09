@@ -49,18 +49,44 @@ public class DB extends SQLiteOpenHelper {
             alertRepository.createSchema();
 
             Date now = Calendar.getInstance().getTime();
-            termRepository.save(new Term("TERM 1", now, now));
-            termRepository.save(new Term("TERM 2", now, now));
+
+            Calendar calZero = Calendar.getInstance();
+            calZero.set(2018, 5, 1);
+            Date zero = calZero.getTime();
+            Calendar calZeroThen = Calendar.getInstance();
+            calZeroThen.set(2018, 11, 31);
+            Date zeroEnd = calZeroThen.getTime();
+
+            Calendar calOne = Calendar.getInstance();
+            calOne.set(2019, 0, 1);
+            Date one = calOne.getTime();
+            Calendar calOneThen = Calendar.getInstance();
+            calOneThen.set(2019, 6, 31);
+            Date oneEnd = calOneThen.getTime();
+
+            Calendar calTwo = Calendar.getInstance();
+            calTwo.set(2019, 5, 1);
+            Date two = calTwo.getTime();
+            Calendar calTwoThen = Calendar.getInstance();
+            calTwoThen.set(2019, 11, 31);
+            Date twoEnd = calTwoThen.getTime();
+
+            termRepository.save(new Term("TERM 0", zero, zeroEnd));
+            termRepository.save(new Term("TERM 1", one, oneEnd));
+            termRepository.save(new Term("TERM 2", two, twoEnd));
 
             mentorRepository.save(new Mentor("Bryan", "Chun", "555-555-1234", "bryan.chun@wgu.edu"));
 
-            courseRepository.save(new Course(1L,"C196", now, now, "IN PROGRESS", ""));
-            courseRepository.save(new Course(1L,"C198", now, now, "IN PROGRESS", ""));
-            courseRepository.save(new Course(2L,"C196", now, now, "IN PROGRESS", ""));
 
-            courseMentorRepository.save(new CourseMentor(1L, 1L));
+            courseRepository.save(new Course(1L,"C100", now, now, "COMPLETE", ""));
+            courseRepository.save(new Course(2L,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.save(new Course(2L,"C198", now, now, "COMPLETE", ""));
+            courseRepository.save(new Course(3L,"C196", now, now, "IN PROGRESS", ""));
+            courseRepository.save(new Course(3L,"C196", now, now, "IN PROGRESS", ""));
+
             courseMentorRepository.save(new CourseMentor(2L, 1L));
             courseMentorRepository.save(new CourseMentor(3L, 1L));
+            courseMentorRepository.save(new CourseMentor(4L, 1L));
 
             assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "OBJECTIVE ASSESSMENT 1", now, "NOT TAKEN"));
             assessmentRepository.save(new Assessment(1L, "OBJECTIVE", "PERFORMANCE ASSESSMENT 1", now, "NOT TAKEN"));

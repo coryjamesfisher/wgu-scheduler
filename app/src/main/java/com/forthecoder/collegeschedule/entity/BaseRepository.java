@@ -125,7 +125,13 @@ public class BaseRepository<T> {
                 continue;
             }
             insertSQL.append(fieldMap.getField()).append(",");
-            values.add(fieldMap.getGetterMethod().invoke(obj));
+            Object value = fieldMap.getGetterMethod().invoke(obj);
+
+            if (value instanceof Date) {
+                value = ((Date)value).getTime();
+            }
+
+            values.add(value);
         }
         insertSQL.deleteCharAt(insertSQL.length() - 1);
         insertSQL.append(") VALUES (");
@@ -163,7 +169,13 @@ public class BaseRepository<T> {
                 continue;
             }
             updateSQL.append(fieldMap.getField()).append(" = ?,");
-            values.add(fieldMap.getGetterMethod().invoke(obj));
+
+            Object value = fieldMap.getGetterMethod().invoke(obj);
+
+            if (value instanceof Date) {
+                value = ((Date)value).getTime();
+            }
+            values.add(value);
         }
 
         if (rowid == null) {
@@ -199,12 +211,12 @@ public class BaseRepository<T> {
 
         for (FieldMap map : fieldMaps) {
 
-            if (map.getType() == Integer.class || map.getType() == Long.class) {
+            if (map.getType() == Integer.class || map.getType() == Long.class || map.getType() == Date.class) {
 
                 if (!map.getField().equals("rowid")) {
                     schemaSQL.append(map.getField()).append(" INTEGER,");
                 }
-            } else if (map.getType() == String.class || map.getType() == Date.class || map.getType().isEnum()) {
+            } else if (map.getType() == String.class || map.getType().isEnum()) {
                 schemaSQL.append(map.getField()).append(" TEXT,");
             }
         }
