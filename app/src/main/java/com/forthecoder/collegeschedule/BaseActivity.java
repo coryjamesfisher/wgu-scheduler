@@ -151,9 +151,9 @@ abstract class BaseActivity extends AppCompatActivity {
                                     navigateToTarget(targetClass, term.getRowid());
                                     return true;
                                 } catch (Exception e) {
-                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(getApplicationContext())
+                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(BaseActivity.this)
                                             .setTitle("Error")
-                                            .setMessage("Failed to locate current term.")
+                                            .setMessage("No term currently configured for this period.")
                                             .setPositiveButton("OK", null);
                                     mainLayout.closeDrawers();
                                     alertDialog.show();
